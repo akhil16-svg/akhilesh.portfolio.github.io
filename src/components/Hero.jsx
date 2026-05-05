@@ -1,176 +1,143 @@
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, FileText, ArrowDown } from 'lucide-react'
+import { ArrowRight, Cloud, Database, Mail, MapPin, Server, ShieldCheck } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './BrandIcons'
+import heroLayer from '../assets/hero.png'
 
-const phrases = [
-  'Full-Stack Software Engineer',
-  'React & Frontend Developer',
-  'Backend API Engineer',
-  'Cloud & DevOps Practitioner',
+const highlights = [
+  { label: 'AWS Certified', value: 'Solutions Architect Associate', icon: ShieldCheck },
+  { label: 'Backend Stack', value: 'Python, Flask, Django, REST APIs', icon: Server },
+  { label: 'Cloud Ready', value: 'Docker, Kubernetes, AWS, CI/CD', icon: Cloud },
 ]
 
-const TYPING_SPEED_MS = 65
-const DELETING_SPEED_MS = 35
-const PAUSE_AFTER_WORD_MS = 2000
-
-function useTyping(phrases) {
-  const [display, setDisplay] = useState('')
-  const [phraseIdx, setPhraseIdx] = useState(0)
-  const [charIdx, setCharIdx] = useState(0)
-  const [deleting, setDeleting] = useState(false)
-
-  useEffect(() => {
-    const current = phrases[phraseIdx]
-    const delay = deleting ? DELETING_SPEED_MS : charIdx === current.length ? PAUSE_AFTER_WORD_MS : TYPING_SPEED_MS
-
-    const t = setTimeout(() => {
-      if (!deleting && charIdx < current.length) {
-        setDisplay(current.slice(0, charIdx + 1))
-        setCharIdx(c => c + 1)
-      } else if (!deleting && charIdx === current.length) {
-        setDeleting(true)
-      } else if (deleting && charIdx > 0) {
-        setDisplay(current.slice(0, charIdx - 1))
-        setCharIdx(c => c - 1)
-      } else {
-        setDeleting(false)
-        setPhraseIdx(i => (i + 1) % phrases.length)
-      }
-    }, delay)
-
-    return () => clearTimeout(t)
-  }, [charIdx, deleting, phraseIdx, phrases])
-
-  return display
-}
+const systemLayers = [
+  { title: 'API Layer', detail: 'Flask, Django, REST', color: 'bg-blue-600' },
+  { title: 'Data Layer', detail: 'SQL, PostgreSQL', color: 'bg-teal-600' },
+  { title: 'Deploy Layer', detail: 'AWS, Docker, K8s', color: 'bg-orange-500' },
+]
 
 export default function Hero() {
-  const typed = useTyping(phrases)
+  const scrollToProjects = (event) => {
+    event.preventDefault()
+    document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-sky-500/5 blur-[120px]" />
-        <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] rounded-full bg-violet-500/5 blur-[100px]" />
-        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-              <circle cx="1.5" cy="1.5" r="1.5" fill="#94a3b8" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#dots)" />
-        </svg>
-      </div>
+    <section id="hero" className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 pb-16 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 -z-10 bg-[#f6f8fb]" />
+      <div className="absolute inset-0 -z-10 opacity-70 [background-image:linear-gradient(#dbeafe_1px,transparent_1px),linear-gradient(90deg,#dbeafe_1px,transparent_1px)] [background-size:72px_72px]" />
+      <div className="absolute inset-x-0 top-0 -z-10 h-56 bg-gradient-to-b from-blue-100 via-teal-50 to-transparent" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-24 pb-16 text-center">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.88fr]">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/5 text-emerald-400 text-sm font-medium mb-8"
+          transition={{ duration: 0.55 }}
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          Available for Software Engineering roles
-        </motion.div>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            Open to backend, cloud, and AI application roles
+          </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-3"
-        >
-          Akhilesh Pingle
-        </motion.h1>
+          <h1 className="max-w-4xl text-5xl font-black leading-[1.02] text-slate-950 sm:text-6xl lg:text-7xl">
+            Building backend systems that are useful, secure, and ready to scale.
+          </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="font-mono text-slate-500 text-base mb-6"
-        >
-          @akhilcodes
-        </motion.p>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            I am Akhilesh Pingle, a software engineer focused on Python backend development,
+            AWS architecture, REST APIs, SQL systems, and AI-powered product workflows.
+          </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl sm:text-2xl font-semibold text-sky-400 mb-6 h-8 flex items-center justify-center gap-1"
-        >
-          <span>{typed}</span>
-          <span className="animate-blink text-sky-400">|</span>
-        </motion.div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#projects"
+              onClick={scrollToProjects}
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-blue-700"
+            >
+              View Projects
+              <ArrowRight size={17} />
+            </a>
+            <a
+              href="mailto:pingleakhil12@gmail.com"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-700"
+            >
+              <Mail size={17} />
+              Contact Me
+            </a>
+          </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10"
-        >
-          Software engineer building scalable web applications — from responsive React frontends 
-          and reusable UI systems to backend service integrations, cloud deployments, and CI/CD pipelines.
-        </motion.p>
+          <div className="mt-8 flex flex-wrap items-center gap-5 text-sm font-semibold text-slate-500">
+            <span className="inline-flex items-center gap-2">
+              <MapPin size={16} className="text-blue-700" />
+              San Francisco Bay Area
+            </span>
+            <a href="https://github.com/akhil16-svg" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-slate-950">
+              <GithubIcon size={17} />
+              GitHub
+            </a>
+            <a href="https://linkedin.com/in/linkakhil" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-blue-700">
+              <LinkedinIcon size={17} />
+              LinkedIn
+            </a>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-12"
-        >
-          <a
-            href="#projects"
-            onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }) }}
-            className="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-sky-500/20 hover:shadow-sky-400/30"
-          >
-            View Projects
-          </a>
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
-            className="px-6 py-3 rounded-lg border border-white/10 hover:border-sky-500/40 text-slate-300 hover:text-white font-semibold text-sm transition-all duration-200 bg-white/[0.03] hover:bg-white/[0.06]"
-          >
-            Get in Touch
-          </a>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-violet-500/30 hover:border-violet-400/60 text-violet-400 hover:text-violet-300 font-semibold text-sm transition-all duration-200 bg-violet-500/[0.04] hover:bg-violet-500/[0.08]"
-          >
-            <FileText size={15} />
-            Resume
-          </a>
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {highlights.map(({ label, value, icon: Icon }, index) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.1 + index * 0.08 }}
+                className="rounded-xl border border-slate-200 bg-white/90 p-4 shadow-sm"
+              >
+                <Icon size={19} className="mb-3 text-blue-700" />
+                <div className="text-sm font-bold text-slate-950">{label}</div>
+                <div className="mt-1 text-xs leading-5 text-slate-500">{value}</div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="flex items-center justify-center gap-5"
+          transition={{ duration: 0.55, delay: 0.12 }}
+          className="relative"
         >
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer"
-            className="text-slate-500 hover:text-slate-200 transition-colors">
-            <GithubIcon size={20} />
-          </a>
-          <a href="https://linkedin.com/in/linkakhil" target="_blank" rel="noopener noreferrer"
-            className="text-slate-500 hover:text-slate-200 transition-colors">
-            <LinkedinIcon size={20} />
-          </a>
-          <a href="mailto:pingleakhil12@gmail.com"
-            className="text-slate-500 hover:text-slate-200 transition-colors">
-            <Mail size={20} />
-          </a>
-        </motion.div>
+          <div className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-2xl shadow-slate-900/10">
+            <div className="relative min-h-[520px] overflow-hidden rounded-[22px] bg-slate-950 p-6 text-white">
+              <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(#334155_1px,transparent_1px),linear-gradient(90deg,#334155_1px,transparent_1px)] [background-size:42px_42px]" />
+              <div className="relative flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-semibold text-teal-300">SYSTEM SNAPSHOT</p>
+                  <h2 className="mt-1 text-2xl font-black">Backend + Cloud</h2>
+                </div>
+                <Database size={26} className="text-orange-300" />
+              </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 text-xs"
-        >
-          <span className="font-mono">scroll</span>
-          <ArrowDown size={14} className="animate-bounce" />
+              <div className="relative mt-8 flex justify-center">
+                <img src={heroLayer} alt="Layered platform architecture" className="h-56 w-56 object-contain drop-shadow-2xl sm:h-64 sm:w-64" />
+              </div>
+
+              <div className="relative mt-8 grid gap-3">
+                {systemLayers.map(layer => (
+                  <div key={layer.title} className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.08] p-4">
+                    <span className={`h-10 w-1.5 rounded-full ${layer.color}`} />
+                    <div>
+                      <div className="text-sm font-bold">{layer.title}</div>
+                      <div className="mt-0.5 text-xs text-slate-300">{layer.detail}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="relative mt-6 rounded-xl border border-teal-300/20 bg-teal-300/10 p-4">
+                <div className="text-xs font-semibold text-teal-200">CURRENT FOCUS</div>
+                <div className="mt-2 text-sm leading-6 text-slate-100">
+                  Scalable APIs, cloud deployments, observability, application security, and AI-assisted workflows.
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

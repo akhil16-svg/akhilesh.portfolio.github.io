@@ -1,21 +1,39 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { GraduationCap } from 'lucide-react'
+import { Award, GraduationCap } from 'lucide-react'
 
 const education = [
   {
-    degree: 'Master of Science in Computer Science',
-    school: 'California State University, East Bay',
-    period: 'Aug 2023 – May 2025',
-    gpa: '3.5',
-    highlights: ['Object-Oriented Programming', 'Data Structures & Algorithms', 'Distributed Systems', 'Database Systems'],
+    title: 'Master of Science in Computer Science',
+    organization: 'California State University, East Bay',
+    period: 'Aug 2023 - May 2025',
+    detail: 'Graduate foundation in distributed systems, database systems, operating systems, algorithms, and software engineering.',
+    type: 'Education',
+    icon: GraduationCap,
   },
   {
-    degree: 'Bachelor of Engineering in Information Technology',
-    school: 'Savitribai Phule Pune University',
-    period: 'Jun 2019 – May 2023',
-    gpa: '4.0',
-    highlights: ['Computer Networks', 'Operating Systems', 'Software Engineering', 'Web Technologies'],
+    title: 'Bachelor of Engineering in Information Technology',
+    organization: 'Savitribai Phule Pune University',
+    period: 'Jun 2019 - May 2023',
+    detail: 'Core study across computer networks, operating systems, software engineering, databases, and web technologies.',
+    type: 'Education',
+    icon: GraduationCap,
+  },
+  {
+    title: 'AWS Certified Solutions Architect Associate',
+    organization: 'Amazon Web Services',
+    period: 'Active credential',
+    detail: 'Architecture fundamentals across scalability, availability, security, cost awareness, networking, compute, and storage.',
+    type: 'Certification',
+    icon: Award,
+  },
+  {
+    title: 'IBM Back-End Development Program',
+    organization: 'Coursera',
+    period: 'Completed',
+    detail: 'Python, Flask, Django, SQL, Git/GitHub, Docker, Kubernetes, OpenShift, serverless, CI/CD, monitoring, Linux, shell scripting, and application security.',
+    type: 'Coursework',
+    icon: Award,
   },
 ]
 
@@ -24,54 +42,51 @@ export default function Education() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="education" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="education" className="px-5 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          transition={{ duration: 0.55 }}
+          className="mb-12 max-w-3xl"
         >
-          <span className="font-mono text-sky-400/70 text-sm tracking-wider">// education</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">Academic Background</h2>
+          <span className="text-sm font-bold text-blue-700">Education and credentials</span>
+          <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+            Academic depth plus current backend training.
+          </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {education.map((edu, i) => (
-            <motion.div
-              key={edu.school}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="bg-white/[0.03] border border-white/[0.07] rounded-xl p-7 hover:border-sky-500/30 transition-all duration-300"
-            >
-              <div className="flex items-start gap-4 mb-5">
-                <div className="w-10 h-10 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center flex-shrink-0">
-                  <GraduationCap size={18} className="text-sky-400" />
+        <div className="grid gap-5 md:grid-cols-2">
+          {education.map((item, index) => {
+            const Icon = item.icon
+            return (
+              <motion.article
+                key={item.title}
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <div className="mb-5 flex items-start justify-between gap-4">
+                  <div className="flex gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+                      <Icon size={22} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-blue-700">{item.type}</div>
+                      <h3 className="mt-1 text-lg font-black leading-snug text-slate-950">{item.title}</h3>
+                      <p className="mt-1 text-sm font-semibold text-slate-500">{item.organization}</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-base font-semibold text-white leading-snug">{edu.degree}</h3>
-                  <p className="text-sky-400 text-sm font-medium mt-0.5">{edu.school}</p>
+                <div className="mb-4 inline-flex rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-600">
+                  {item.period}
                 </div>
-              </div>
-
-              <div className="flex items-center gap-4 mb-5 text-sm">
-                <span className="font-mono text-slate-500 text-xs">{edu.period}</span>
-                <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
-                  GPA: {edu.gpa}
-                </span>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {edu.highlights.map(h => (
-                  <span key={h} className="text-xs px-2.5 py-1 rounded-md bg-white/[0.04] text-slate-400 border border-white/[0.06]">
-                    {h}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                <p className="text-sm leading-7 text-slate-600">{item.detail}</p>
+              </motion.article>
+            )
+          })}
         </div>
       </div>
     </section>

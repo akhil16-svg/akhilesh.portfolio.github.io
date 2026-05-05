@@ -3,25 +3,25 @@ import { GithubIcon, LinkedinIcon } from './BrandIcons'
 
 export default function Footer() {
   return (
-    <footer className="py-10 px-6 border-t border-white/[0.06]">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="font-mono text-slate-500 text-sm">
-          <span className="text-sky-400">AP</span>
-          <span className="text-slate-600 mx-2">/</span>
-          <span>© {new Date().getFullYear()} Akhilesh Pingle</span>
+    <footer className="border-t border-slate-200 bg-white px-5 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
+        <div className="text-sm font-semibold text-slate-500">
+          <span className="text-slate-950">Akhilesh Pingle</span>
+          <span className="mx-2 text-slate-300">/</span>
+          <span>Copyright {new Date().getFullYear()}</span>
         </div>
         <div className="flex items-center gap-4">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer"
-            className="text-slate-600 hover:text-slate-300 transition-colors">
-            <GithubIcon size={16} />
+          <a href="https://github.com/akhil16-svg" target="_blank" rel="noopener noreferrer"
+            className="text-slate-400 transition hover:text-slate-950" aria-label="GitHub">
+            <GithubIcon size={17} />
           </a>
           <a href="https://linkedin.com/in/linkakhil" target="_blank" rel="noopener noreferrer"
-            className="text-slate-600 hover:text-slate-300 transition-colors">
-            <LinkedinIcon size={16} />
+            className="text-slate-400 transition hover:text-blue-700" aria-label="LinkedIn">
+            <LinkedinIcon size={17} />
           </a>
           <a href="mailto:pingleakhil12@gmail.com"
-            className="text-slate-600 hover:text-slate-300 transition-colors">
-            <Mail size={16} />
+            className="text-slate-400 transition hover:text-slate-950" aria-label="Email">
+            <Mail size={17} />
           </a>
         </div>
       </div>

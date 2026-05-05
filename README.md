@@ -1,16 +1,16 @@
-# Akhilesh Pingle — Portfolio
+# Akhilesh Pingle Portfolio
 
-**Live site:** https://akhil16-svg.github.io/akhilesh.portfolio.github.io/
+Live site: https://akhil16-svg.github.io/akhilesh.portfolio.github.io/
 
-Personal portfolio website for Akhilesh Pingle, Software Engineer.
+Portfolio website for Akhilesh Pingle, focused on Python backend development, AWS architecture, REST APIs, cloud-ready systems, and AI application work.
 
 ## Stack
 
-- **React 19** — functional components and hooks
-- **Vite 8** — build tool with HMR
-- **Tailwind CSS v3** — utility-first styling with a custom dark theme
-- **Framer Motion** — scroll-triggered animations and transitions
-- **Lucide React** — icons
+- React 19
+- Vite 8
+- Tailwind CSS
+- Framer Motion
+- Lucide React
 
 ## Development
 
@@ -25,18 +25,18 @@ npm run dev
 npm run build
 ```
 
-Production output goes to `dist/`.
-
-## Deployment
-
-The site is deployed via GitHub Pages. The `dist/` folder is the deployable artifact.
+Production output goes to `dist/`. The GitHub Actions workflow publishes that folder to GitHub Pages.
 
 ## Sections
 
-- **Hero** — availability badge, typewriter effect, CTA buttons
-- **About** — personal summary, terminal card, stat highlights
-- **Projects** — Real Estate Platform, Walmart Sales Forecasting
-- **Skills** — languages, frontend, cloud/devops, tools
-- **Experience** — Software Engineer & Intern at Omatochi
-- **Education** — MS Computer Science (CSUEB), BE Information Technology (SPPU)
-- **Contact** — validated contact form, email, LinkedIn
+- Hero with backend/cloud positioning and architecture visual
+- About with credentials and engineering focus
+- Projects with real GitHub links
+- Skills aligned to Python, Flask, Django, AWS, Docker, Kubernetes, CI/CD, Linux, and security
+- Experience at Omatochi
+- Education and certifications
+- Contact links for email, LinkedIn, and GitHub
+
+## GitHub Pages
+
+This project deploys with `.github/workflows/deploy.yml`. GitHub Pages should be configured to use GitHub Actions as the build and deployment source.

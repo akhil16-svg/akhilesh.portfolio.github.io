@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Mail } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
@@ -8,7 +8,6 @@ const navLinks = [
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
-  { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
@@ -21,11 +20,13 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20)
       const sections = document.querySelectorAll('section[id]')
       let current = ''
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 120) current = s.id
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 140) current = section.id
       })
       setActive(current)
     }
+
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -40,40 +41,58 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0a0c12]/90 backdrop-blur-md border-b border-white/5'
-          : 'bg-transparent'
+          ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-sm'
+          : 'bg-white/70 backdrop-blur-md border-b border-transparent'
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a
-          href="#hero"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-          className="text-lg font-bold font-mono text-sky-400 hover:text-sky-300 transition-colors"
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="group flex items-center gap-3"
+          aria-label="Back to top"
         >
-          AP<span className="animate-blink text-slate-400">_</span>
-        </a>
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-950 text-sm font-black text-white shadow-sm">
+            AP
+          </span>
+          <span className="hidden text-left sm:block">
+            <span className="block text-sm font-bold leading-4 text-slate-950">Akhilesh Pingle</span>
+            <span className="block text-xs font-medium text-slate-500">Backend, cloud, AI apps</span>
+          </span>
+        </button>
 
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden items-center gap-7 md:flex">
           {navLinks.map(({ label, href }) => (
             <li key={label}>
               <button
                 onClick={() => handleNav(href)}
-                className={`text-sm font-medium transition-colors relative group ${
-                  active === href.slice(1) ? 'text-sky-400' : 'text-slate-400 hover:text-slate-200'
+                className={`relative text-sm font-semibold transition-colors ${
+                  active === href.slice(1) ? 'text-blue-700' : 'text-slate-600 hover:text-slate-950'
                 }`}
               >
                 {label}
-                <span className={`absolute -bottom-1 left-0 h-px bg-sky-400 transition-all duration-300 ${
-                  active === href.slice(1) ? 'w-full' : 'w-0 group-hover:w-full'
-                }`} />
+                <span
+                  className={`absolute -bottom-2 left-0 h-0.5 rounded-full bg-blue-600 transition-all duration-300 ${
+                    active === href.slice(1) ? 'w-full' : 'w-0'
+                  }`}
+                />
               </button>
             </li>
           ))}
         </ul>
 
+        <div className="hidden items-center gap-3 md:flex">
+          <a
+            href="mailto:pingleakhil12@gmail.com"
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-700"
+          >
+            <Mail size={16} />
+            Contact
+          </a>
+        </div>
+
         <button
-          className="md:hidden text-slate-400 hover:text-slate-200 transition-colors"
-          onClick={() => setMenuOpen(v => !v)}
+          className="rounded-lg border border-slate-200 bg-white p-2 text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-950 md:hidden"
+          onClick={() => setMenuOpen(value => !value)}
           aria-label="Toggle menu"
         >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -86,15 +105,17 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden bg-[#0d1017]/95 backdrop-blur-md border-b border-white/5"
+            className="border-b border-slate-200 bg-white/95 px-5 py-4 shadow-sm md:hidden"
           >
-            <ul className="flex flex-col px-6 py-4 gap-4">
-              {navLinks.map(({ label, href }) => (
+            <ul className="flex flex-col gap-3">
+              {[...navLinks, { label: 'Contact', href: '#contact' }].map(({ label, href }) => (
                 <li key={label}>
                   <button
                     onClick={() => handleNav(href)}
-                    className={`text-sm font-medium transition-colors ${
-                      active === href.slice(1) ? 'text-sky-400' : 'text-slate-400'
+                    className={`w-full rounded-lg px-3 py-2 text-left text-sm font-semibold transition ${
+                      active === href.slice(1)
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-slate-700 hover:bg-slate-100'
                     }`}
                   >
                     {label}

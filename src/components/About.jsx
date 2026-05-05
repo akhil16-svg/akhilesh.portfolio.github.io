@@ -1,125 +1,105 @@
-import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Award, CheckCircle2, Code2, MapPin, ShieldCheck } from 'lucide-react'
 
-function SectionLabel({ label }) {
+function SectionIntro() {
   return (
-    <span className="font-mono text-sky-400/70 text-sm tracking-wider">{label}</span>
+    <div className="mb-12 max-w-3xl">
+      <span className="text-sm font-bold text-blue-700">About</span>
+      <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
+        Practical engineering with a backend-first mindset.
+      </h2>
+      <p className="mt-5 text-lg leading-8 text-slate-600">
+        I like building software that has a clear purpose: APIs that are easy to maintain,
+        systems that can scale, and user workflows that feel simple because the backend is doing
+        the right work.
+      </p>
+    </div>
   )
 }
 
-function StatCard({ num, label }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
-      className="bg-white/[0.04] border border-white/[0.07] rounded-xl p-5 text-center hover:border-sky-500/30 hover:bg-white/[0.06] transition-all duration-200"
-    >
-      <div className="text-2xl font-bold text-sky-400 mb-1">{num}</div>
-      <div className="text-xs text-slate-500 leading-snug">{label}</div>
-    </motion.div>
-  )
-}
+const strengths = [
+  'Python backend development with Flask, Django, REST APIs, and SQL systems.',
+  'Cloud architecture with AWS, Docker, Kubernetes, CI/CD, and deployment fundamentals.',
+  'AI-enabled projects across invoice intelligence, chatbot workflows, and forecasting.',
+  'CS fundamentals from graduate study in computer science, distributed systems, databases, and operating systems.',
+]
+
+const credentials = [
+  { label: 'AWS Certified', value: 'Solutions Architect Associate', icon: ShieldCheck },
+  { label: 'IBM Back-End Development', value: 'Coursera program completed', icon: Award },
+  { label: 'Location', value: 'San Francisco Bay Area, CA', icon: MapPin },
+]
 
 export default function About() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="px-5 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          transition={{ duration: 0.55 }}
         >
-          <SectionLabel label="// about" />
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">
-            Building Software That Ships
-          </h2>
+          <SectionIntro />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.86fr]">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-6"
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
           >
-            <p className="text-slate-400 leading-relaxed">
-              I&apos;m a <span className="text-slate-200 font-medium">Software Engineer</span> with a{' '}
-              <span className="text-slate-200 font-medium">Master&apos;s in Computer Science</span> from California 
-              State University, East Bay. My academic foundation covers object-oriented programming, data 
-              structures and algorithms, operating systems, database systems, and distributed computing.
-            </p>
-            <p className="text-slate-400 leading-relaxed">
-              I apply this foundation to engineer scalable React frontends, production-grade backend APIs, 
-              asynchronous workflows, and cloud-deployed services. I care deeply about code quality, 
-              system reliability, and delivering features that hold up under real-world load.
+            <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+              <Code2 size={24} />
+            </div>
+            <h3 className="text-2xl font-black text-slate-950">What I bring</h3>
+            <p className="mt-4 leading-8 text-slate-600">
+              I am a software engineer with a Master&apos;s in Computer Science from California State
+              University, East Bay. My work is strongest at the intersection of backend engineering,
+              cloud architecture, and AI application development.
             </p>
 
-            <div className="bg-[#0d1017] border border-white/[0.08] rounded-xl overflow-hidden font-mono text-sm">
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-                <span className="w-3 h-3 rounded-full bg-red-500/60" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                <span className="w-3 h-3 rounded-full bg-green-500/60" />
-                <span className="ml-3 text-slate-500 text-xs">terminal</span>
-              </div>
-              <div className="p-5 space-y-3 text-slate-400">
-                <div>
-                  <span className="text-sky-400">$ </span>
-                  <span className="text-slate-300">whoami</span>
+            <div className="mt-7 grid gap-4">
+              {strengths.map(item => (
+                <div key={item} className="flex gap-3">
+                  <CheckCircle2 size={19} className="mt-1 shrink-0 text-teal-600" />
+                  <p className="text-sm leading-6 text-slate-600">{item}</p>
                 </div>
-                <div className="text-emerald-400 pl-2">&gt; akhilesh_pingle</div>
-                <div className="mt-2">
-                  <span className="text-sky-400">$ </span>
-                  <span className="text-slate-300">cat focus.txt</span>
-                </div>
-                <div className="text-emerald-400 pl-2">
-                  &gt; react, javascript, python,<br />
-                  &gt; aws, redis, rest_apis, ci_cd
-                </div>
-                <div className="mt-2">
-                  <span className="text-sky-400">$ </span>
-                  <span className="text-slate-300">echo $STATUS</span>
-                </div>
-                <div className="text-emerald-400 pl-2">
-                  &gt; open_to_work
-                  <span className="inline-block w-2 h-4 bg-emerald-400/70 ml-1 animate-blink" />
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="space-y-6"
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.14 }}
+            className="grid gap-4"
           >
-            <div className="grid grid-cols-2 gap-4">
-              <StatCard num="10k+" label="Daily Workflows Supported" />
-              <StatCard num="25%" label="Failure Rate Reduction" />
-              <StatCard num="40%" label="Productivity Improvement" />
-              <StatCard num="2+" label="Years Engineering Experience" />
-            </div>
-
-            <div className="space-y-3">
-              {[
-                { icon: '📍', text: 'San Francisco Bay Area, CA — Open to Relocate' },
-                { icon: '✉️', text: 'pingleakhil12@gmail.com' },
-                { icon: '🔗', text: 'linkedin.com/in/linkakhil' },
-              ].map(({ icon, text }) => (
-                <div key={text} className="flex items-center gap-3 text-slate-400 text-sm">
-                  <span>{icon}</span>
-                  <span>{text}</span>
+            {credentials.map(({ label, value, icon: Icon }) => (
+              <div key={label} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-950 text-white">
+                    <Icon size={20} />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-slate-950">{label}</div>
+                    <div className="mt-1 text-sm leading-6 text-slate-500">{value}</div>
+                  </div>
                 </div>
-              ))}
+              </div>
+            ))}
+
+            <div className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
+              <div className="text-sm font-black text-blue-800">Currently focused on</div>
+              <p className="mt-2 text-sm leading-6 text-blue-950/75">
+                Backend roles where I can build APIs, cloud-ready services, deployment workflows,
+                and AI tools that solve real business problems.
+              </p>
             </div>
           </motion.div>
         </div>

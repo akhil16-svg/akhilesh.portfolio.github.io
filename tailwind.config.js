@@ -11,13 +11,12 @@ export default {
         mono: ['Fira Code', 'Cascadia Code', 'monospace'],
       },
       colors: {
-        bg: '#0a0c12',
-        surface: 'rgba(255,255,255,0.04)',
-        primary: '#63b3ed',
-        accent: '#9f7aea',
-        cyan: '#76e4f7',
-        muted: '#94a3b8',
-        faint: '#64748b',
+        bg: '#f6f8fb',
+        surface: '#ffffff',
+        primary: '#2563eb',
+        accent: '#14b8a6',
+        muted: '#64748b',
+        faint: '#94a3b8',
       },
       animation: {
         blink: 'blink 1s step-end infinite',
@@ -32,4 +31,3 @@ export default {
   },
   plugins: [],
 }
-
