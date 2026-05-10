@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atharv Joshi — Brand Strategist & Positioning Consultant</title>
+<meta name="description" content="I find what a brand provably owns — and build everything from there.">
+<meta property="og:title" content="Atharv Joshi — Brand Strategist">
+<meta property="og:description" content="I find what a brand provably owns — and build everything from there.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Satoshi:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET & BASE ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-deep:   #1C3D2E;
+  --green-mid:    #2A4A38;
+  --green-light:  #3D6B50;
+  --gold:         #A68B2E;
+  --gold-light:   #C4A84A;
+  --bg:           #F7F5F0;
+  --bg-warm:      #F0EDE6;
+  --text:         #1A1A1A;
+  --text-muted:   #5A5A52;
+  --text-faint:   #9A9A90;
+  --rule:         rgba(28,61,46,0.15);
+  --font-head:    'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Satoshi', 'Helvetica Neue', sans-serif;
+  --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  cursor: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+}
+
+/* ── CUSTOM CURSOR ───────────────────────────────── */
+#cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--green-deep);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s;
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--green-deep);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s var(--ease), height 0.35s var(--ease),
+              border-color 0.35s, opacity 0.35s, background 0.35s;
+  opacity: 0.7;
+}
+
+#cursor-ring.hovered {
+  width: 56px;
+  height: 56px;
+  background: rgba(28,61,46,0.06);
+  border-color: var(--gold);
+  opacity: 1;
+}
+
+#cursor-ring.clicked {
+  width: 28px;
+  height: 28px;
+  background: rgba(166,139,46,0.12);
+}
+
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.4s var(--ease), padding 0.4s var(--ease),
+              backdrop-filter 0.4s, box-shadow 0.4s;
+}
+
+nav.scrolled {
+  padding: 18px 60px;
+  background: rgba(247,245,240,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+.nav-name {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--green-deep);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+nav.scrolled .nav-name { opacity: 1; }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.25s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
+}
+
+.nav-links a:hover { color: var(--green-deep); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ── HERO ────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 60px 80px;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.7s var(--ease) 0.3s forwards;
+}
+
+.hero-name {
+  font-family: var(--font-head);
+  font-size: clamp(72px, 10vw, 130px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--green-deep);
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.8s var(--ease) 0.5s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--green-light);
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.7s var(--ease) 0.8s forwards;
+}
+
+.hero-positioning {
+  max-width: 480px;
+}
+
+.hero-positioning p {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--green-deep);
+  color: #F7F5F0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+
+.btn-primary:hover::before { transform: scaleX(1); }
+.btn-primary span { position: relative; z-index: 1; }
+
+.hero-scroll-hint {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.hero-rule {
+  position: absolute;
+  bottom: 0; left: 60px; right: 60px;
+  height: 1px;
+  background: var(--rule);
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION BASE ───────────────────────────────── */
+section {
+  padding: 120px 60px;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 64px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.section-heading {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--green-deep);
+  margin-bottom: 24px;
+}
+
+/* ── HOW I THINK ────────────────────────────────── */
+#think {
+  background: var(--green-deep);
+  color: var(--bg);
+}
+
+#think .section-label { color: var(--gold-light); }
+#think .section-label::after { background: var(--gold-light); }
+#think .section-heading { color: #F7F5F0; }
+
+.think-intro {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(247,245,240,0.6);
+  max-width: 560px;
+  margin-bottom: 80px;
+  line-height: 1.6;
+}
+
+.think-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(247,245,240,0.1);
+}
+
+.think-card {
+  background: var(--green-deep);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s var(--ease);
+}
+
+.think-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--green-mid);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.think-card:hover::before { opacity: 1; }
+
+.think-card-num {
+  font-family: var(--font-head);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.35;
+  line-height: 1;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.think-card-title {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.think-card-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(247,245,240,0.65);
+  position: relative;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s var(--ease) 0.05s, transform 0.4s var(--ease) 0.05s;
+}
+
+.think-card:hover .think-card-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── WORK / CASE STUDIES ────────────────────────── */
+#work {
+  background: var(--bg);
+}
+
+.work-index {
+  margin-top: 16px;
+}
+
+.work-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: start;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: padding-left 0.4s var(--ease);
+}
+
+.work-item:first-child { border-top: 1px solid var(--rule); }
+
+.work-item:hover { padding-left: 12px; }
+
+.work-num {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-faint);
+  padding-top: 6px;
+}
+
+.work-content { flex: 1; }
+
+.work-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.work-tag {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 3px 10px;
+  border: 1px solid rgba(166,139,46,0.3);
+}
+
+.work-title {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--green-deep);
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+.work-title::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.5s var(--ease);
+}
+
+.work-item:hover .work-title::after { width: 100%; }
+
+.work-finding {
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.6;
+  margin-top: 8px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.work-item:hover .work-finding { opacity: 1; transform: translateY(0); }
+
+.work-arrow {
+  font-size: 20px;
+  color: var(--text-faint);
+  padding-top: 8px;
+  transition: color 0.3s, transform 0.3s var(--ease);
+}
+
+.work-item:hover .work-arrow {
+  color: var(--gold);
+  transform: translateX(6px);
+}
+
+/* ── CASE STUDY PAGE (in-page sections) ─────────── */
+.case-study {
+  display: none;
+  background: var(--bg);
+  padding: 140px 60px 120px;
+}
+
+.case-study.active { display: block; }
+
+.cs-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-decoration: none;
+  margin-bottom: 80px;
+  transition: color 0.25s;
+}
+
+.cs-back:hover { color: var(--green-deep); }
+
+.cs-header { margin-bottom: 80px; }
+
+.cs-client {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.cs-title {
+  font-family: var(--font-head);
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--green-deep);
+  margin-bottom: 32px;
+}
+
+.cs-meta {
+  display: flex;
+  gap: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+}
+
+.cs-meta-item label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+
+.cs-meta-item span {
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.cs-body { max-width: 760px; }
+
+.cs-section { margin-bottom: 72px; }
+
+.cs-section-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.cs-section h3 {
+  font-family: var(--font-head);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--green-deep);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.cs-section p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+
+.cs-callout {
+  margin: 48px 0;
+  padding: 40px 48px;
+  background: var(--green-deep);
+  position: relative;
+}
+
+.cs-callout::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold);
+}
+
+.cs-callout p {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: #F7F5F0;
+  line-height: 1.6;
+}
+
+.cs-decisions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.cs-decision {
+  padding: 32px;
+  border: 1px solid var(--rule);
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.cs-decision:hover { border-color: var(--gold); }
+
+.cs-decision-num {
+  font-family: var(--font-head);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.3;
+  margin-bottom: 12px;
+}
+
+.cs-decision h4 {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  margin-bottom: 8px;
+}
+
+.cs-decision p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.cs-stat-row {
+  display: flex;
+  gap: 40px;
+  margin: 40px 0;
+  padding: 32px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.cs-stat { text-align: center; flex: 1; }
+
+.cs-stat strong {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--green-deep);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.cs-stat span {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ── CONTENT STRATEGY LAYER ─────────────────────── */
+.cs-content-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 56px 0 28px;
+  padding-top: 48px;
+  border-top: 1px solid var(--rule);
+}
+
+.cs-content-header-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.cs-content-header-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.cs-content-title {
+  font-family: var(--font-head);
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--green-deep);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.cs-content-title em {
+  font-style: italic;
+  color: var(--green-light);
+}
+
+.cs-content-intro {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin-bottom: 32px;
+}
+
+/* Gap grid */
+.cs-gap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.cs-gap-item {
+  padding: 20px 24px;
+  border: 1px solid var(--rule);
+  transition: border-color 0.3s;
+}
+
+.cs-gap-item:hover { border-color: var(--gold); }
+
+.cs-gap-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+
+.cs-gap-title {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--green-deep);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.cs-gap-body {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Pillar list */
+.cs-pillar-list {
+  margin: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.cs-pillar-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+
+.cs-pillar-name {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  padding-top: 2px;
+}
+
+.cs-pillar-body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* Flow steps */
+.cs-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  margin: 24px 0;
+}
+
+.cs-flow-step {
+  background: var(--bg);
+  padding: 28px 24px;
+  position: relative;
+}
+
+.cs-flow-pct {
+  font-family: var(--font-head);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.cs-flow-name {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  margin-bottom: 10px;
+}
+
+.cs-flow-body {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* What works / what doesn't */
+.cs-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  margin: 24px 0;
+}
+
+.cs-split-col {
+  background: var(--bg);
+  padding: 24px;
+}
+
+.cs-split-col-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.cs-split-col-label.works { color: var(--green-light); }
+.cs-split-col-label.doesnt { color: #A0522D; }
+
+.cs-split-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cs-split-col ul li {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-muted);
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.cs-split-col.works-col ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--green-light);
+  font-size: 11px;
+}
+
+.cs-split-col.doesnt-col ul li::before {
+  content: '×';
+  position: absolute;
+  left: 0;
+  color: #A0522D;
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .cs-gap-grid { grid-template-columns: 1fr; }
+  .cs-pillar-row { grid-template-columns: 1fr; gap: 6px; }
+  .cs-flow { grid-template-columns: 1fr; }
+  .cs-split { grid-template-columns: 1fr; }
+}
+
+/* ── POV / THINKING ────────────────────────────── */
+#pov {
+  background: var(--bg-warm);
+}
+
+.pov-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  margin-top: 16px;
+}
+
+.pov-card {
+  background: var(--bg-warm);
+  padding: 40px 36px;
+  transition: background 0.3s;
+}
+
+.pov-card:hover { background: var(--bg); }
+
+.pov-brand {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.pov-card h3 {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--green-deep);
+  margin-bottom: 16px;
+}
+
+.pov-card p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.pov-implication {
+  display: block;
+  margin-top: 20px;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--green-light);
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ── ABOUT ──────────────────────────────────────── */
+#about {
+  background: var(--bg);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 120px;
+  align-items: start;
+}
+
+.about-left { position: sticky; top: 120px; }
+
+.about-initials {
+  font-family: var(--font-head);
+  font-size: 120px;
+  font-weight: 300;
+  color: var(--green-deep);
+  opacity: 0.08;
+  line-height: 1;
+  margin-bottom: 30px;
+}
+
+.about-title {
+  font-family: var(--font-head);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--green-deep);
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.about-location {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.about-right p {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.about-right p strong {
+  color: var(--green-deep);
+  font-weight: 400;
+}
+
+.about-note {
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid var(--rule);
+}
+
+.about-note p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+  font-style: normal;
+  font-size: 15px;
+}
+
+.about-credentials {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.credential-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+
+.credential-row span:first-child { color: var(--text-muted); }
+.credential-row span:last-child { color: var(--green-deep); font-weight: 400; }
+
+/* ── CONTACT ────────────────────────────────────── */
+#contact {
+  background: var(--green-deep);
+  text-align: center;
+  padding: 140px 60px;
+}
+
+.contact-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 48px;
+}
+
+.contact-heading {
+  font-family: var(--font-head);
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: #F7F5F0;
+  margin-bottom: 40px;
+  letter-spacing: -0.02em;
+}
+
+.contact-heading em {
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 56px;
+}
+
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.contact-link:hover { opacity: 0.7; }
+
+.contact-link-label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247,245,240,0.4);
+}
+
+.contact-link-value {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 300;
+  color: #F7F5F0;
+}
+
+/* ── FOOTER ─────────────────────────────────────── */
+footer {
+  background: var(--green-deep);
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(247,245,240,0.1);
+}
+
+footer p {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(247,245,240,0.3);
+}
+
+/* ── SCROLL REVEAL ──────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 900px) {
+  nav, section, #hero, #contact, footer { padding-left: 28px; padding-right: 28px; }
+  nav { padding-top: 20px; padding-bottom: 20px; }
+  nav.scrolled { padding: 14px 28px; }
+  nav { justify-content: flex-end; }
+  .nav-name { display: none; }
+  .nav-links {
+    flex: 1 1 auto;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+  }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .hero-cta { align-items: flex-start; }
+  .hero-eyebrow,
+  .hero-name,
+  .hero-bottom {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .think-grid { grid-template-columns: 1fr; }
+  .think-card-body,
+  .work-finding {
+    opacity: 1;
+    transform: none;
+  }
+  .work-item { grid-template-columns: 48px 1fr auto; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-left { position: static; }
+  .pov-grid { grid-template-columns: 1fr; }
+  .cs-decisions { grid-template-columns: 1fr; }
+  .cs-meta { flex-wrap: wrap; gap: 24px; }
+  .cs-body { max-width: none; }
+  .cs-stat-row { gap: 24px; }
+  .contact-links { flex-wrap: wrap; gap: 32px; }
+  #cursor-dot, #cursor-ring { display: none; }
+  body { cursor: auto; }
+}
+
+@media (max-width: 600px) {
+  nav, section, #hero, #contact, footer { padding-left: 20px; padding-right: 20px; }
+  nav { padding-top: 16px; padding-bottom: 16px; }
+  nav.scrolled { padding: 12px 20px; }
+  .nav-links {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+  }
+  .nav-links li {
+    min-width: 0;
+    text-align: center;
+  }
+  .nav-links a { font-size: 11px; letter-spacing: 0.06em; }
+  #hero {
+    min-height: 100svh;
+    padding-bottom: 56px;
+  }
+  .hero-eyebrow {
+    max-width: 100%;
+    line-height: 1.6;
+  }
+  .hero-name {
+    font-size: clamp(54px, 18vw, 72px);
+    line-height: 0.98;
+  }
+  .hero-positioning p {
+    font-size: 20px;
+  }
+  section {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+  .section-label {
+    margin-bottom: 40px;
+  }
+  .section-heading {
+    font-size: clamp(36px, 12vw, 46px);
+  }
+  .think-intro {
+    margin-bottom: 56px;
+  }
+  .think-card,
+  .pov-card {
+    padding: 36px 28px;
+  }
+  .work-item {
+    grid-template-columns: 36px 1fr;
+    gap: 10px;
+    padding: 34px 0;
+  }
+  .work-arrow {
+    display: none;
+  }
+  .work-title {
+    display: block;
+  }
+  .case-study {
+    padding: 112px 20px 88px;
+  }
+  .cs-back {
+    margin-bottom: 56px;
+  }
+  .cs-header {
+    margin-bottom: 56px;
+  }
+  .cs-title {
+    font-size: clamp(42px, 13vw, 56px);
+    line-height: 1;
+  }
+  .cs-meta {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cs-section {
+    margin-bottom: 56px;
+  }
+  .cs-callout {
+    margin: 36px 0;
+    padding: 32px 28px;
+  }
+  .cs-callout p {
+    font-size: 20px;
+  }
+  .cs-stat-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .cs-stat {
+    text-align: left;
+  }
+  .cs-decision,
+  .cs-gap-item,
+  .cs-flow-step,
+  .cs-split-col {
+    padding: 24px 20px;
+  }
+  .cs-content-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cs-content-header-rule {
+    width: 100%;
+  }
+  .about-initials {
+    font-size: 96px;
+  }
+  .about-right p {
+    font-size: 19px;
+  }
+  .credential-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .contact-heading {
+    font-size: clamp(42px, 13vw, 58px);
+  }
+  .contact-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-link-value {
+    overflow-wrap: anywhere;
+  }
+  footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="#hero" class="nav-name">Atharv Joshi</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#pov">POV</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-eyebrow">Brand Strategist &amp; Positioning Consultant · Pune, India</div>
+  <h1 class="hero-name">Atharv Joshi<br><em></em></h1>
+  <div class="hero-bottom">
+    <div class="hero-positioning">
+      <p>I find what a brand provably owns —<br>and build everything from there.</p>
+    </div>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary"><span>View My Work ↓</span></a>
+      <span class="hero-scroll-hint">Scroll to explore</span>
+    </div>
+  </div>
+  <div class="hero-rule"></div>
+</section>
+
+<!-- ── HOW I THINK ───────────────────────────────── -->
+<section id="think">
+  <div class="section-label">The Strategic Lens</div>
+  <h2 class="section-heading reveal">Most brand problems<br>are clarity problems.</h2>
+  <p class="think-intro reveal reveal-delay-1">Before any brief, I start with the same question: what is actually true about this brand that no competitor can say?</p>
+
+  <div class="think-grid">
+    <div class="think-card reveal reveal-delay-1">
+      <div class="think-card-num">01</div>
+      <div class="think-card-title">Consumer Psychology First</div>
+      <p class="think-card-body">Every brand decision is a psychology problem. What does the buyer fear? What makes them trust? What triggers the choice? I work through this before writing a single positioning line.</p>
+    </div>
+    <div class="think-card reveal reveal-delay-2">
+      <div class="think-card-num">02</div>
+      <div class="think-card-title">Positioning Must Be Earned</div>
+      <p class="think-card-body">Claiming "premium quality" without proof is noise. I look for claims the brand can verify — the kind competitors cannot replicate because they require proof the brand actually possesses.</p>
+    </div>
+    <div class="think-card reveal reveal-delay-3">
+      <div class="think-card-num">03</div>
+      <div class="think-card-title">Founder Language as Data</div>
+      <p class="think-card-body">What a founder says repeatedly reveals what they believe. I run frequency analysis on questionnaires to surface unarticulated brand truth before any formal strategy begins.</p>
+    </div>
+    <div class="think-card reveal reveal-delay-1">
+      <div class="think-card-num">04</div>
+      <div class="think-card-title">Communication Systems</div>
+      <p class="think-card-body">A campaign dies. A system scales. I build verbal identity, archetype frameworks, and tone guides so every content piece makes the same brand promise — automatically.</p>
+    </div>
+    <div class="think-card reveal reveal-delay-2">
+      <div class="think-card-num">05</div>
+      <div class="think-card-title">Trust Architecture</div>
+      <p class="think-card-body">In categories where purchase anxiety is high — healthcare, used cars, premium food — trust is the primary conversion driver. I design the proof structure before the message.</p>
+    </div>
+    <div class="think-card reveal reveal-delay-3">
+      <div class="think-card-num">06</div>
+      <div class="think-card-title">Competitive Gap First</div>
+      <p class="think-card-body">I audit the entire competitor landscape before recommending a position. The goal is to find the lane no one is owning — not the lane where everyone is already shouting louder.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORK ──────────────────────────────────────── -->
+<section id="work">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-heading reveal">Strategy applied<br>to real businesses.</h2>
+
+  <div class="work-index">
+
+    <!-- JB & Co -->
+    <a href="#" class="work-item reveal" onclick="openCase('jb'); return false;">
+      <div class="work-num">01</div>
+      <div class="work-content">
+        <div class="work-tags">
+          <span class="work-tag">Brand Audit</span>
+          <span class="work-tag">Repositioning</span>
+          <span class="work-tag">Sub-Brand</span>
+        </div>
+        <div class="work-title">JB &amp; Co. — Premium Dry Fruits</div>
+        <p class="work-finding">"A 60-year legacy brand. Zero complaints. No brand story. The sourcing story was the brand's biggest asset and its biggest silence."</p>
+      </div>
+      <div class="work-arrow">→</div>
+    </a>
+
+    <!-- Social Basket -->
+    <a href="#" class="work-item reveal reveal-delay-1" onclick="openCase('sb'); return false;">
+      <div class="work-num">02</div>
+      <div class="work-content">
+        <div class="work-tags">
+          <span class="work-tag">Zero-to-One</span>
+          <span class="work-tag">Positioning</span>
+          <span class="work-tag">GTM</span>
+        </div>
+        <div class="work-title">Social Basket — Decision-First Platform</div>
+        <p class="work-finding">"The founder was deeply fluent in the problem. The most urgent work was building fluency in what good actually feels like."</p>
+      </div>
+      <div class="work-arrow">→</div>
+    </a>
+
+    <!-- Zomato -->
+    <a href="#" class="work-item reveal reveal-delay-2" onclick="openCase('zomato'); return false;">
+      <div class="work-num">03</div>
+      <div class="work-content">
+        <div class="work-tags">
+          <span class="work-tag">Independent Analysis</span>
+          <span class="work-tag">Brand Maturation</span>
+        </div>
+        <div class="work-title">Zomato — Brand Maturation Study</div>
+        <p class="work-finding">"Zomato's brand energy was excitement-generating in a moment consumers had entered utility mode. That gap is a strategic problem."</p>
+      </div>
+      <div class="work-arrow">→</div>
+    </a>
+
+    <!-- Cars24 -->
+    <a href="#" class="work-item reveal reveal-delay-3" onclick="openCase('cars24'); return false;">
+      <div class="work-num">04</div>
+      <div class="work-content">
+        <div class="work-tags">
+          <span class="work-tag">Independent Analysis</span>
+          <span class="work-tag">Trust Architecture</span>
+        </div>
+        <div class="work-title">Cars24 — Rebrand &amp; Trust Architecture</div>
+        <p class="work-finding">"Shifting from all-caps to sentence case is not typographic preference — it is strategic positioning. Brand architecture doing real work."</p>
+      </div>
+      <div class="work-arrow">→</div>
+    </a>
+
+    <!-- Bombay Shaving Company -->
+    <a href="#" class="work-item reveal reveal-delay-4" onclick="openCase('bsc'); return false;">
+      <div class="work-num">05</div>
+      <div class="work-content">
+        <div class="work-tags">
+          <span class="work-tag">Independent Analysis</span>
+          <span class="work-tag">Repositioning</span>
+          <span class="work-tag">Growth Strategy</span>
+        </div>
+        <div class="work-title">Bombay Shaving Company — Strategic Analysis &amp; Repositioning</div>
+        <p class="work-finding">"A single challenger identity cannot credibly carry shaving, body care, fragrance, and Bombae simultaneously. The brand is being asked to be a house of brands without the architecture of one."</p>
+      </div>
+      <div class="work-arrow">→</div>
+    </a>
+
+
+    <!-- Pune Protein Company -->
+    <a href="#" class="work-item reveal reveal-delay-5" onclick="openCase('ppc'); return false;">
+      <div class="work-num">06</div>
+      <div class="work-content">
+        <div class="work-tags">
+          <span class="work-tag">Positioning Diagnosis</span>
+          <span class="work-tag">Audience Architecture</span>
+          <span class="work-tag">Content System Design</span>
+        </div>
+        <div class="work-title">Pune Protein Company — Brand Positioning &amp; Content Strategy</div>
+        <p class="work-finding">"The brand had first-mover advantage in a category with zero dominant players in India. It was spending that advantage on content indistinguishable from every competitor."</p>
+      </div>
+      <div class="work-arrow">→</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ── CASE STUDY: JB & Co ──────────────────────── -->
+<div id="cs-jb" class="case-study">
+  <a href="#" class="cs-back" onclick="closeCase(); return false;">← Back to work</a>
+  <div class="cs-header">
+    <div class="cs-client">JB &amp; Co. · Premium Dry Fruits · Pune</div>
+    <h2 class="cs-title">Brand Audit &amp;<br>Repositioning</h2>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Studio</label><span>Sociomunk</span></div>
+      <div class="cs-meta-item"><label>Year</label><span>2025–2026</span></div>
+      <div class="cs-meta-item"><label>Type</label><span>Brand Audit, Repositioning, Sub-Brand</span></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-stat-row">
+      <div class="cs-stat"><strong>60 yrs</strong><span>Sourcing Knowledge</span></div>
+      <div class="cs-stat"><strong>Zero</strong><span>Returns &amp; Complaints</span></div>
+      <div class="cs-stat"><strong>5–10L</strong><span>Packets Sold</span></div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Brief</div>
+      <p>A 60-year legacy brand. Zero complaints. No brand story. JB &amp; Co. is a Pune-based dry fruit brand built on six decades of generational sourcing knowledge. The product quality is exceptional. The problem was not the product. The problem was that the sourcing story — the brand's most defensible asset — had never been told publicly.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p>"Hand-sorted is the most powerful ownable claim and the least-used word. The sourcing story was the brand's biggest asset and its biggest silence."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Critical Finding</div>
+      <h3>73.3% of the Instagram audience was male.</h3>
+      <p>The intended primary buyer — a health-conscious woman aged 25–44 — was entirely absent from the page. Every piece of content being published was reaching the wrong person. The audience strategy was rebuilt from zero.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Strategy — Four Key Decisions</div>
+      <div class="cs-decisions">
+        <div class="cs-decision">
+          <div class="cs-decision-num">01</div>
+          <h4>Positioning</h4>
+          <p>Anchor to ownable proof. Built positioning around three verifiable claims: 60-year generational sourcing, hand-sorted quality, zero-complaint record. Rejected generic "premium quality" language competitors use without evidence.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">02</div>
+          <h4>Architecture</h4>
+          <p>Two archetypes, two brands. JB &amp; Co. (parent): Sage archetype — warm authority, earned trust. Sub-brand Day 3: Regular Person archetype — self-aware, non-preachy, habit-first.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">03</div>
+          <h4>Sub-Brand Naming</h4>
+          <p>23 name candidates evaluated across 9 parameters. Day 3 selected for psychological precision — named after the behavioural science finding that habits require three consecutive repetitions to form.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">04</div>
+          <h4>Content Gaps</h4>
+          <p>Audit found no founder origin narrative, no sourcing and process content, no price justification content — the three pillars most likely to earn trust and convert premium-priced buyers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>"Repeat buyers carry empty packets back to the store. That is not loyalty — that is proof. The sourcing story is the brand story."</p>
+    </div>
+
+    <!-- ── CONTENT STRATEGY LAYER ── -->
+    <div class="cs-content-header">
+      <span class="cs-content-header-label">Content Strategy Layer</span>
+      <div class="cs-content-header-rule"></div>
+    </div>
+
+    <h3 class="cs-content-title">Content as <em>Trust Architecture</em></h3>
+    <p class="cs-content-intro">The brand audit revealed that content strategy could not be treated separately from positioning strategy. The same gap that existed in JB &amp; Co.'s market perception existed on the page: exceptional credibility sitting entirely off-screen. The content system was built to make that proof visible — through authority, not volume.</p>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Diagnosis — What the Page Revealed</div>
+      <p>The Instagram audit of @jbcostore_india uncovered a precise, structural content failure. 65 posts, 495 followers, average reel views of 100–300 — not crossing follower count. Instagram's algorithm reads this as disinterest and reduces distribution. Every weak post made the next post harder to reach. But the root cause was not creative quality. It was strategic misdirection at the level of audience, format, and story.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p><strong>The most critical number:</strong> 73.3% of the Instagram audience was male. The primary buyer — a health-conscious woman aged 28–42 who controls what comes into the household — was entirely absent from the page. Every post published was reaching the wrong person.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Five Missing Content Pillars</div>
+      <p>The audit identified five content pillars that were entirely absent — not underperforming, absent. These were not content ideas. They were the specific trust-building mechanisms the brand's premium pricing required and had never activated.</p>
+
+      <div class="cs-pillar-list">
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Founder Origin Story</div>
+          <div class="cs-pillar-body">The 60-year legacy — the brand's single strongest trust asset — appeared nowhere on the page. A brand that can say "Jaibhagwan ji Goyal started sorting these in 1965 and we have not changed how we do it" has a differentiation story no competitor can replicate. It was invisible.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Sourcing &amp; Process Proof</div>
+          <div class="cs-pillar-body">"Hand-sorted quality" was claimed in copy. No content showed the sorting process. A claim is noise. Showing the process is proof. In a premium category where every brand uses the same language, process visibility is the only credibility mechanism that cannot be fabricated.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Price Justification Content</div>
+          <div class="cs-pillar-body">JB &amp; Co. is priced above market. No content addressed why. The founder acknowledged this directly: "We are expensive. We haven't built the story of why we're worth it." Without price justification content, premium pricing reads as arrogance rather than confidence.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Real Usage Moments</div>
+          <div class="cs-pillar-body">Zero content showed the product in daily life — desk snacking, gifting, morning routine, school tiffin. The content spoke about the product but never to the buyer. People don't engage with products. They engage with themselves in products. The person was entirely absent.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Audience Conversation Content</div>
+          <div class="cs-pillar-body">No polls, no questions, no relatable snacking moments. Community was not being built. The page functioned as a broadcast channel, not a brand. A premium brand without community is a brand that earns transactions but not loyalty.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Content System — Three Strategic Directions</div>
+      <p>Rather than a content calendar, the audit produced three content strategy directions — each one built from a distinct angle on the same positioning truth, and each designed to solve a different trust deficit.</p>
+
+      <div class="cs-gap-grid">
+        <div class="cs-gap-item">
+          <div class="cs-gap-label">Strategy 01</div>
+          <div class="cs-gap-title">The Smarter Snacker</div>
+          <div class="cs-gap-body">Position JB &amp; Co. as the brand that tells the truth about snacking while every competitor performs it. Ingredient-by-ingredient comparisons — no agenda, just facts. Label decoding. Grade transparency (W240 cashews — what the grade means, why it costs more). This is authority-building content, not lifestyle content. It earns the premium price by educating the buyer.</div>
+        </div>
+        <div class="cs-gap-item">
+          <div class="cs-gap-label">Strategy 02</div>
+          <div class="cs-gap-title">The Everyday Snack</div>
+          <div class="cs-gap-body">Own the moment before the product. The 4pm slump, the pre-gym reach, the midnight cupboard — the product appears at the end, never the beginning. This solves the "product-forward, person-absent" diagnosis from the audit. The buyer sees themselves in the content before they see the product. Recognition precedes trust.</div>
+        </div>
+        <div class="cs-gap-item">
+          <div class="cs-gap-label">Strategy 03</div>
+          <div class="cs-gap-title">The Craveable Healthy</div>
+          <div class="cs-gap-body">Make healthy snacking look like something people want, not something they should want. Visually irresistible snack boards, unexpected pairings, occasion setups — taste and desire lead, health follows quietly. This addresses the perception gap identified in the audit: the brand's content was not earning desire, only communicating function.</div>
+        </div>
+        <div class="cs-gap-item">
+          <div class="cs-gap-label">Format Diagnosis</div>
+          <div class="cs-gap-title">Static-Heavy, Reel-Light</div>
+          <div class="cs-gap-body">The content audit found that most posts were static graphics — festival creatives, product promotions, cartoon character illustrations. Instagram's discovery algorithm prioritises short-form video. The account was publishing primarily for an engagement mechanic the platform no longer rewards. The ratio: 23 interactions on 1,728 views, a signal Instagram reads as disinterest and punishes with reduced reach.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">What Stops Now vs. What Replaces It</div>
+      <div class="cs-split">
+        <div class="cs-split-col doesnt-col">
+          <div class="cs-split-col-label doesnt">Content That Burns Reach</div>
+          <ul>
+            <li>Product posts with no story and no hook — they train the algorithm to ignore the account</li>
+            <li>Catalogue-style pack shots that show the product and say nothing about why it matters</li>
+            <li>Cartoon dry fruit characters — wrong register for a premium brand, creates conflicting identity signals</li>
+            <li>Reactive festival posts designed the day before, published without a point of view</li>
+            <li>Content with no snacking moment — the buyer must see themselves before they see the product</li>
+          </ul>
+        </div>
+        <div class="cs-split-col works-col">
+          <div class="cs-split-col-label works">Content That Builds Trust</div>
+          <ul>
+            <li>Founder-led origin narrative — the 60-year story told consistently as a brand pillar, not a campaign</li>
+            <li>Behind-the-process reels — showing the hand-sorting, the grading, the farm relationship</li>
+            <li>Moment-first content — the 4pm office hunger, the gifting decision, the morning routine</li>
+            <li>Ingredient transparency — W240 grade explained, farm origin shown, zero-complaint record stated</li>
+            <li>Festival content with a point of view — not a generic design, a specific reason to share</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>"The brand speaks like a supplier. It needs to sound like the authority it already is. The shift is not in what to say — it is in how confidently it is said. Sixty years of sourcing knowledge cannot earn trust it never communicates."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Implication</div>
+      <p>A 60-year competitive moat was invisible to new buyers. Strategy's only job was making it visible. The proof was always there — the language for it was not. This is the most common gap in legacy brands entering D2C: they have earned trust they have never learned to communicate.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── CASE STUDY: Social Basket ─────────────────── -->
+<div id="cs-sb" class="case-study">
+  <a href="#" class="cs-back" onclick="closeCase(); return false;">← Back to work</a>
+  <div class="cs-header">
+    <div class="cs-client">Social Basket · Event Platform · Pune</div>
+    <h2 class="cs-title">Zero-to-One<br>Brand Strategy</h2>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Studio</label><span>Sociomunk</span></div>
+      <div class="cs-meta-item"><label>Year</label><span>2025–2026</span></div>
+      <div class="cs-meta-item"><label>Type</label><span>Positioning, GTM, Audience Architecture</span></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-section">
+      <div class="cs-section-label">The Brief</div>
+      <p>The competitor is not BookMyShow. It is the user's own indecision. Social Basket is an early-stage Pune startup built around one sharply identified truth: the problem urban Indians have on a Friday evening is not a lack of options. It is decision fatigue.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p>"Decision dominated the founder's responses. Sorted barely appeared. The most urgent brand work was not more problem diagnosis. It was building fluency in the solution feeling."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Critical Finding</div>
+      <h3>The problem was articulated far more fluently than the solution.</h3>
+      <p>"Sorted" — the single most emotionally precise word in the entire document — the exact feeling the product must deliver — appeared only a handful of times while "decision" appeared dozens of times. The founder was deeply fluent in what was wrong. The brand language for what good feels like had not been developed yet.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Strategic Output</div>
+      <div class="cs-decisions">
+        <div class="cs-decision">
+          <div class="cs-decision-num">01</div>
+          <h4>Unclaimed Position</h4>
+          <p>Ease of Decision + Personalisation. BookMyShow is functional but impersonal. Instagram is personal but not decisive. No platform combines both. This intersection is Social Basket's defensible territory.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">02</div>
+          <h4>Archetype System</h4>
+          <p>Primary: Caregiver — takes the cognitive load off, has already thought of everything. Secondary: Sage — curates so well that every suggestion feels intelligent and considered.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">03</div>
+          <h4>Audience Architecture</h4>
+          <p>Priya (depleted professional, 24–34): retention engine, repeat rate metric. Arjun (spontaneous early professional, 22–28): growth engine, sharing and group-forward rate.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">04</div>
+          <h4>Content System</h4>
+          <p>Three-layer system: Feel Seen (30%) earns attention. Feel Trust (45%) converts. Feel Certain (25%) closes — but only because the first two have done their work.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>"People are not bad at choosing. They are mentally tired of choosing. That is the single best line in the entire questionnaire. It should appear in the brand strategy, the pitch deck, and potentially the product itself."</p>
+    </div>
+
+    <!-- ── CONTENT STRATEGY LAYER ── -->
+    <div class="cs-content-header">
+      <span class="cs-content-header-label">Content Strategy Layer</span>
+      <div class="cs-content-header-rule"></div>
+    </div>
+
+    <h3 class="cs-content-title">Content as <em>Decision Support</em></h3>
+    <p class="cs-content-intro">For Social Basket, content strategy was not a separate workstream — it was product strategy expressed externally. The product's entire premise is reducing decision fatigue. The content system had to do the same job before a user ever opened the app. Every piece of content needed to move someone from confusion toward certainty, not entertain them mid-scroll.</p>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Founding Gap — Language the Brand Hadn't Built Yet</div>
+      <p>The word cloud analysis of the founder's questionnaire revealed a precise and critical imbalance. "Decision" appeared dozens of times — the founder was exceptionally fluent in articulating the problem. "Sorted" — the single most emotionally precise word for what the product delivers, the exact feeling of resolution and relief — barely appeared. The brand had built deep language for what was wrong and almost no language for what good felt like. Content was the mechanism for closing that gap. The system needed to make "sorted" the emotional centrepiece — not as a tagline, but as the lived feeling the content repeatedly created.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p><strong>The content brief in one sentence:</strong> Every piece of content must move a person closer to the feeling of "okay, that's sorted" — not closer to more options, more information, or more browsing.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Three-Layer Content System</div>
+      <p>The content architecture was built around a sequential trust-building flow derived directly from the audience psychology mapped in the brand audit. The three layers operate in order — a user who hasn't felt seen cannot be made to feel trust; a user who doesn't trust the brand cannot be moved to certainty. Each layer has a distinct job, a distinct tone, and a distinct conversion function.</p>
+
+      <div class="cs-flow">
+        <div class="cs-flow-step">
+          <div class="cs-flow-pct">30%</div>
+          <div class="cs-flow-name">Feel Seen</div>
+          <div class="cs-flow-body">Content that names the user's exact experience before offering anything. The Friday evening scroll. The "kya kare?" that goes nowhere. The plan that dies in a WhatsApp group. The user must recognise themselves completely before the brand earns the right to speak. This layer earns attention — it does not convert. Conversion from content that hasn't first earned recognition is noise.</div>
+        </div>
+        <div class="cs-flow-step">
+          <div class="cs-flow-pct">45%</div>
+          <div class="cs-flow-name">Feel Trust</div>
+          <div class="cs-flow-body">Content that proves the curation is real. Specific venue stories — one place, told in three lines, with honest particulars. The refund policy shown as a feature, not buried as a footnote. Confirmation copy that sounds like a person who cares, not a system that processed a request. Trust is built through specificity, not through claims. "Hand-picked" is a claim. Naming the venue, the time, the vibe, and the reason it was chosen is proof.</div>
+        </div>
+        <div class="cs-flow-step">
+          <div class="cs-flow-pct">25%</div>
+          <div class="cs-flow-name">Feel Certain</div>
+          <div class="cs-flow-body">Content that removes the final barrier to commitment. The quiet recommendation — no caption, just a venue, a time, and a booking link. The shareable event card that does the deciding for the group, so no one has to take personal responsibility for suggesting something. "Social Basket picked this for tonight." The authority transfers from the brand to the card. The user forwards it. The plan happens.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Audience-Calibrated Content Tone</div>
+      <p>The verbal identity system defined different content temperatures for each primary segment — not different brands, but different emphasis. The core voice stays consistent. What shifts is what is led with.</p>
+
+      <div class="cs-gap-grid">
+        <div class="cs-gap-item">
+          <div class="cs-gap-label">Segment 01 — Priya, 27</div>
+          <div class="cs-gap-title">Depleted Professional</div>
+          <div class="cs-gap-body">Content for this segment leads with the decision, not the options. Short sentences. One recommendation at a time. Acknowledge the tiredness without dwelling on it. Never ask them to choose from more than three things at once. The tone is warm but not cheerful — they are tired, not sad. Copy like: "You've been making decisions all week. Let this one be easy. Tonight, try Saz rooftop. Two-tap booking."</div>
+        </div>
+        <div class="cs-gap-item">
+          <div class="cs-gap-label">Segment 02 — Arjun, 24</div>
+          <div class="cs-gap-title">Spontaneous Early Professional</div>
+          <div class="cs-gap-body">Content for this segment is built to be forwarded, not just read. Conversational. Social-proof loaded. Specific enough to settle the group argument. Copy like: "Can't decide where to take the group this weekend? Book Fog at Koregaon Park — fits 8, has a good drinks menu, and nobody will complain. Send the link. Plans made." The share mechanic is the conversion. The card does the deciding.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Content Formats with Strategic Function</div>
+      <p>The content audit produced four format concepts — each one designed to do specific brand or conversion work, not simply fill a content calendar.</p>
+
+      <div class="cs-pillar-list">
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">The Friday Evening Prompt</div>
+          <div class="cs-pillar-body">"Here's one plan for tonight." A single specific venue, time, and vibe — published every Friday. This format embeds the brand in the exact moment the product is built for. It is also the most direct expression of the decision-first positioning: Social Basket does not ask what you want to do. It tells you. Calm. Certain. Already figured out.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">The Monthly Social Recap Card</div>
+          <div class="cs-pillar-body">A shareable card sent to each user at month end: "October — 8 weekend evenings available. 5 went out. 3 sorted by Social Basket. 2 lost to the couch." Self-aware, slightly funny, completely relatable. This format serves two functions: it gives existing users a shareable brand moment and it demonstrates to non-users exactly what the product does — in the language of outcomes, not features.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">The Reluctant Review</div>
+          <div class="cs-pillar-body">Instead of star ratings, a single post-event question: "Would you have stayed home instead?" One number, public: "74% would have stayed home. Glad they didn't." This format reframes the review in the brand's exact emotional language — the couch vs. the evening. It is also the most precise proof mechanism available: not "this was excellent" but "I wouldn't have gone without this."</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Pune at 8pm</div>
+          <div class="cs-pillar-body">A recurring Friday and Saturday visual: a live-style map of Pune with dots showing where Social Basket evenings are happening. No venue names, no details — only presence. Caption: "Pune at 8pm. Some of these are sorted evenings. Most are not yet." This format makes going out feel like participation in something already happening, creating social urgency through observation rather than manufactured FOMO.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">What Content Must Never Do</div>
+      <div class="cs-split">
+        <div class="cs-split-col doesnt-col">
+          <div class="cs-split-col-label doesnt">Content That Breaks the Brand</div>
+          <ul>
+            <li>Listicles — "Top 10 places in Pune this weekend" — positions Social Basket as a discovery platform, not a decision platform</li>
+            <li>FOMO-driven countdown content — "Only 4 seats left!" — manufactured urgency is a direct values violation</li>
+            <li>Influencer-style storytelling that centres the creator over the recommendation</li>
+            <li>Generic motivational copy — "Life is short, make plans" — says nothing specific, earns nothing</li>
+            <li>Urgency badges, trending labels, popularity scores — every competitor uses these, and the brand exists to be different from every competitor</li>
+          </ul>
+        </div>
+        <div class="cs-split-col works-col">
+          <div class="cs-split-col-label works">Content That Is the Brand</div>
+          <ul>
+            <li>The scenario post — a real situation most users immediately recognise, told before any product mention</li>
+            <li>The venue story — one place, three lines, honest specifics, no superlatives</li>
+            <li>The group chat moment — content that solves the coordination problem out loud, designed to be forwarded</li>
+            <li>The quiet recommendation — no caption, just a venue and a booking link, confidence through restraint</li>
+            <li>The Friday prompt — one plan, stated with calm certainty, published at the exact moment the product is needed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>"Content strategy for Social Basket was product strategy with a distribution channel. The app moves a user from confused to sorted in under 5 minutes. The content had to make that feeling legible before they ever opened the app — and make sharing it feel as natural as forwarding a friend's recommendation."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Implication</div>
+      <p>The moat is not the mood filter — competitors can build that in a sprint. The moat is curation quality, editorial voice, and the trust built over 1,000 real transactions. That takes time and cannot be copied quickly. Early-stage brands often mistake features for positioning. The real work was naming the emotional state the product delivers, not the features it ships.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── CASE STUDY: Zomato ─────────────────────────── -->
+<div id="cs-zomato" class="case-study">
+  <a href="#" class="cs-back" onclick="closeCase(); return false;">← Back to work</a>
+  <div class="cs-header">
+    <div class="cs-client">Zomato · Independent Analysis</div>
+    <h2 class="cs-title">Brand Maturation<br>&amp; Positioning Shift</h2>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Type</label><span>Independent Analysis</span></div>
+      <div class="cs-meta-item"><label>Focus</label><span>Brand Maturation, Consumer Psychology</span></div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="cs-section">
+      <div class="cs-section-label">The Problem</div>
+      <p>Zomato built one of the sharpest consumer brands in India — then became a food delivery app that also does grocery, dining reservations, B2B supply, quick commerce, and live events. When a brand becomes hard to describe, it becomes hard to trust.</p>
+    </div>
+    <div class="cs-callout">
+      <p>"Brands that remain in excitement mode while consumers have entered utility mode feel tone-deaf. Zomato's energy was excitement-generating in a moment consumers wanted reliability."</p>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-label">Repositioning Recommendation</div>
+      <h3>From "Feeding India" → "India's Most Trusted Food Companion."</h3>
+      <p>This shift signals maturity and reliability without abandoning Zomato's cultural playfulness. The brand does not need to stop being fun. It needs to start being dependable. Consumer psychology moved through three phases: novelty (2018–2020) → habit (2020–2022) → utility friction (2022–present). The brand's communication did not follow.</p>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-label">The Implication</div>
+      <p>Category expansion is a brand architecture problem before it is a product problem. Zomato's communication system was built for a single-product brand. When the product expanded, the brand language did not evolve to hold the new complexity. This is the most common failure mode for Indian consumer brands scaling beyond their founding category.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── CASE STUDY: Cars24 ─────────────────────────── -->
+<div id="cs-cars24" class="case-study">
+  <a href="#" class="cs-back" onclick="closeCase(); return false;">← Back to work</a>
+  <div class="cs-header">
+    <div class="cs-client">Cars24 · Independent Analysis</div>
+    <h2 class="cs-title">Trust Architecture<br>&amp; Rebrand Analysis</h2>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Type</label><span>Independent Analysis</span></div>
+      <div class="cs-meta-item"><label>Focus</label><span>Trust Architecture, Category Psychology</span></div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="cs-section">
+      <div class="cs-section-label">The Problem</div>
+      <p>The Indian used-car market runs on anxiety. Cars24 built a brilliant seller-first platform — "sell your car in 30 minutes" — then pivoted to B2C retail without building equivalent buyer-facing trust infrastructure. The result: trusted by sellers, opaque and anxiety-inducing for buyers.</p>
+    </div>
+    <div class="cs-callout">
+      <p>"Shifting from CARS24 to Cars24 is not typographic preference — it is strategic positioning. CARS24 spoke to sellers who needed to be convinced. Cars24 speaks to buyers who need to feel calm."</p>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-label">The Analysis</div>
+      <h3>The open circular logo is deliberate.</h3>
+      <p>A closed circle signals a finished transaction. An open circle signals an ongoing relationship. In a category where buyers fear abandonment after the deal, this is brand architecture doing real work. Every element of the rebrand — the casing, the logo, the color temperature — was designed to shift the emotional register from transactional to relational.</p>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-label">Proposed Positioning</div>
+      <p style="font-family: var(--font-head); font-size: 22px; font-weight: 300; font-style: italic; color: var(--green-deep);">"India's Full-Cycle Car Platform. Buy with confidence. Sell without hassle. Own with support."</p>
+      <p style="margin-top: 16px;">The only claim in the category that requires scale + quality assurance + lifecycle continuity simultaneously. No competitor can make all three credibly.</p>
+    </div>
+    <div class="cs-section">
+      <div class="cs-section-label">The Implication</div>
+      <p>In high-anxiety purchase categories, brand architecture is trust infrastructure. Every visual and verbal decision is either building or eroding the buyer's confidence. The rebrand succeeds not because it looks better — but because every element was chosen to answer the buyer's unspoken fear.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── CASE STUDY: Bombay Shaving Company ────────── -->
+<div id="cs-bsc" class="case-study">
+  <a href="#" class="cs-back" onclick="closeCase(); return false;">← Back to work</a>
+  <div class="cs-header">
+    <div class="cs-client">Bombay Shaving Company · Independent Analysis</div>
+    <h2 class="cs-title">Strategic Analysis &amp;<br>Growth Repositioning</h2>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Type</label><span>Independent Analysis</span></div>
+      <div class="cs-meta-item"><label>Focus</label><span>Repositioning, Brand Architecture, Growth Strategy</span></div>
+      <div class="cs-meta-item"><label>Market</label><span>India Men's Grooming</span></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-stat-row">
+      <div class="cs-stat"><strong>₹550 Cr+</strong><span>Revenue Run-Rate FY25</span></div>
+      <div class="cs-stat"><strong>75+</strong><span>Active SKUs</span></div>
+      <div class="cs-stat"><strong>₹10,000 Cr</strong><span>Women's Grooming TAM</span></div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Industry Context</div>
+      <p>India's men's grooming market was valued at approximately USD 1.3 billion in FY2024 and is projected to cross USD 3.2 billion by FY2029 — growing at 18–20% CAGR. This growth is structural, not cosmetic, powered by rising urbanisation, a young median population (28.4 years), and a generational shift in male self-perception that has normalised grooming as identity expression rather than mere hygiene. Post-pandemic, the home grooming occasion became permanent. BSC, as a scaled D2C platform, is disproportionately positioned to capture this.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p>"A single challenger identity cannot credibly carry shaving, body care, fragrance, and Bombae simultaneously. The brand is being asked to be a house of brands without the architecture of one."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Strategic Tension</div>
+      <h3>Category breadth without brand architecture creates a positioning trap.</h3>
+      <p>BSC is India's leading premium men's grooming challenger — ₹550 crore revenue, PAT positive. Its portfolio now spans razors, trimmers, body care, fragrance, skincare, and Bombae (women's hair removal). Each vertical requires a different brand archetype. The 'boldly aspirational' challenger identity that drove early growth cannot simultaneously carry the equity of a full-body grooming platform, a women's brand, and a fragrance house without architectural clarity. The moat is real. The architecture has not kept pace with it.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Competitive Landscape</div>
+      <div class="cs-decisions">
+        <div class="cs-decision">
+          <div class="cs-decision-num">01</div>
+          <h4>The Man Company</h4>
+          <p>Most direct peer. ₹182 Cr FY24, 58% YoY growth. Strong D2C equity in premium skincare and gifting. Currently absent in hardware — the risk materialises if they enter trimmers within 24 months.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">02</div>
+          <h4>Beardo (Marico)</h4>
+          <p>Distribution-backed challenger with Marico's 5M+ retail network. The structural Tier-2 threat. BSC cannot close this gap through digital spend alone — it requires investment-grade offline expansion.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">03</div>
+          <h4>Gillette (P&amp;G)</h4>
+          <p>60–65% razor market share by volume, but D2C capabilities are nascent. BSC's opportunity lives precisely in the white space Gillette cannot credibly occupy: premium, Indian, personal, and holistic.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">04</div>
+          <h4>Philips</h4>
+          <p>The trimmer hardware standard-bearer. Risk intensifies if Philips enters the ₹1,500–3,000 full-body segment aggressively. BSC's product breadth is the current moat against this scenario.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Consumer Psychology Shift</div>
+      <h3>From grooming as obligation → grooming as self-investment.</h3>
+      <p>The foundational shift in Indian male grooming psychology is the migration from hygiene motivation to identity motivation. A man choosing an activated charcoal foam over a commodity can is making a statement about self-perception. Brands that speak to this identity axis earn emotional stickiness that discount promotions cannot erode. BSC's communication, however, has remained largely in product-feature demonstration mode — it has not yet made the jump to identity affirmation and ingredient credibility that the evolved consumer demands.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p>"Bombae — currently a secondary navigation item on the BSC website — represents the largest unrealised asset. The women's grooming market in India exceeds ₹10,000 crore. Bombae needs standalone brand investment, not a footnote."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Repositioning Recommendation</div>
+      <h3>From "India's boldest grooming brand" → "India's most trusted grooming companion."</h3>
+      <p>This is not a reinvention — it is a maturation. BSC retains its cultural boldness and 'Khul ke Khel' attitude while adding a new layer of substance: ingredient credibility, quality consistency, and a visible commitment to the full grooming lifecycle. The brand moves from disruptive challenger to category-defining institution — still bold, but now also trustworthy enough to be the only grooming brand a man needs.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Growth Restructuring — Three Axes</div>
+      <div class="cs-decisions">
+        <div class="cs-decision">
+          <div class="cs-decision-num">01</div>
+          <h4>Distribution Depth</h4>
+          <p>General trade expansion from 25 cities to the 3–5 lakh store target. Requires dedicated regional sales teams, distributor incentive architecture, and a value-tier entry SKU at ₹99–299 as the foot-in-door product.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">02</div>
+          <h4>Bombae — Standalone Brand</h4>
+          <p>Separate identity, investment, and measurement from the parent BSC brand. Dedicated performance marketing, women's influencer ecosystem, and a subscription model — monthly wax strips, razors, body care bundles. Path to ₹100 Cr in 36 months.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">03</div>
+          <h4>Subscription Architecture</h4>
+          <p>A 'BSC Grooming Subscription' — razor + foam + face wash at ₹299–599/month — creates predictable ARR, improves LTV, and reduces dependence on promotional discounting. The Dollar Shave Club model India has not yet produced.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">04</div>
+          <h4>Brand Architecture</h4>
+          <p>'Branded House with Federated Identities.' BSC parent anchors men's grooming. Bombae operates with its own visual language and positioning. Fragrance is structured as a distinct creative sub-brand leveraging the city-named EDP range.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Projected Outcomes (FY2026–27)</div>
+      <div class="cs-stat-row">
+        <div class="cs-stat"><strong>₹900–1,000 Cr</strong><span>FY27 Revenue Target</span></div>
+        <div class="cs-stat"><strong>₹100 Cr</strong><span>Bombae Standalone</span></div>
+        <div class="cs-stat"><strong>8–12%</strong><span>EBITDA Margin FY27</span></div>
+      </div>
+      <p>Revenue at 25–30% CAGR is supportable given current run-rate momentum, market tailwinds, and the large untapped offline opportunity. The most important caveat is execution risk — the organisational discipline required for multi-vertical, multi-geography, and multi-gender execution at this scale is a different competency from the D2C challenger phase.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p>"The most important competitive outcome is increasing the cost for The Man Company, Beardo, and Gillette to displace BSC from category leadership. A BSC that has deepened offline distribution, habituated a Tier-2 base, and scaled Bombae is a significantly more defensible business than today's version."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Implication</div>
+      <p>BSC's strategic challenge is not survival — its moat is real and compounding. The challenge is architecture. When a brand scales faster than its structure, the structure eventually constrains the scale. Category breadth, founder equity, and distribution intelligence are formidable assets. But assets require architecture to convert into durable market position. The next phase of BSC's growth is a brand architecture problem as much as it is a distribution or product problem.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── CASE STUDY: Pune Protein Company ─────────── -->
+<div id="cs-ppc" class="case-study">
+  <a href="#" class="cs-back" onclick="closeCase(); return false;">← Back to work</a>
+  <div class="cs-header">
+    <div class="cs-client">Pune Protein Company · D2C Plant Protein · Pune</div>
+    <h2 class="cs-title">Brand Positioning Diagnosis &amp;<br>Content Strategy</h2>
+    <div class="cs-meta">
+      <div class="cs-meta-item"><label>Type</label><span>Positioning Diagnosis, Audience Architecture, Content System Design</span></div>
+      <div class="cs-meta-item"><label>Year</label><span>2026</span></div>
+      <div class="cs-meta-item"><label>Category</label><span>D2C · Premium Plant Protein · Snacking</span></div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-stat-row">
+      <div class="cs-stat"><strong>46g</strong><span>Plant Protein per 100g — Rivals Whey</span></div>
+      <div class="cs-stat"><strong>Zero</strong><span>Dominant Edamame Brands in India</span></div>
+      <div class="cs-stat"><strong>₹605–1,099</strong><span>Price Range — Premium Tier Pricing</span></div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Brief</div>
+      <p>A D2C plant protein brand built around one genuinely extraordinary product. Pune Protein Company's hero SKU — roasted edamame at 46g of plant protein per 100g — rivals the density of whey. The product is not the problem. The problem is that nothing about how this brand shows up on Instagram communicates why the product is worth ₹605. A premium price requires premium authority. PPC had the product. It had not yet built the brand.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p>"A nutrition claim repeated in twenty formats is not positioning. It is wallpaper. The brand had first-mover advantage in an empty category — and was spending it on content that looked identical to every competitor."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Critical Finding</div>
+      <h3>The brand was building the worst possible audience for its price point.</h3>
+      <p>PPC's content was attracting the most price-sensitive, least loyal segment in Indian health content — fitness-interested males, 22–35, already following every protein and supplement brand. These buyers compare on grams-per-rupee. They leave for any better-priced launch. They do not pay ₹605 without heavy justification, and they have no identity reason to stay. The audience PPC should own — the urban professional who wants one smarter snacking decision per day — was entirely absent from the account. The brand was not in the wrong category. It was talking to the wrong people inside the right one.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Strategic Problem</div>
+      <h3>Premium pricing. Mid-market content energy. No positioning logic connecting them.</h3>
+      <p>PPC was doing what most D2C health brands do: repeating its strongest claim — 46g protein — across every format. Static posts. Reel captions. Bio copy. The number appeared everywhere. But a nutrition specification is not a brand position. It is evidence. Evidence without a felt truth behind it cannot earn a ₹605 purchase from an audience that does not yet trust you.</p>
+      <p style="margin-top: 16px;">Three credibility mechanisms were sitting entirely dormant. The roasting process that explains the premium price and proves the clean-label claim had never been shown. The founder's pivot — from Fit &amp; Flex to PPC, a sharp and deliberate market-reading decision — was invisible on the account. The BBQ and Mexicano flavour range signalled taste-first intent correctly, then was never dramatised in content. Every asset that could have justified the price existed. None had been activated.</p>
+    </div>
+
+    <div class="cs-callout">
+      <p>"Nobody buys ₹605 for protein alone. They buy because they are the kind of person who eats smarter than most. That identity purchase is the entire brand strategy — and the brand had not yet written it."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Positioning Shift</div>
+      <h3>From nutrition announcement to felt truth.</h3>
+      <p>The existing position — "high-protein clean snack for health-conscious people" — is a description that every competitor in the category claims. Descriptions are not ownable. The recommended shift: <em>the snack that makes your protein intake effortless, because you actually want to eat it.</em> This is a tension-first frame. It names the real purchase friction — the buyer who is tired of choices that force a compromise between taste and nutrition — and resolves it specifically. Desire leads. Health follows as proof, not argument.</p>
+      <p style="margin-top: 16px;">The content identity that PPC should own: <em>the snack that punches above its weight.</em> Confident. Slightly irreverent. Never preachy. Bold texture over soft-lit wellness aesthetic. Every post leads with taste or surprise; health arrives as confirmation, not justification.</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Audience Diagnosis — The Mismatch</div>
+      <div class="cs-decisions">
+        <div class="cs-decision">
+          <div class="cs-decision-num">01</div>
+          <h4>Currently Attracting — Wrong Segment</h4>
+          <p>Fitness-interested males, 22–35. Already saturated with supplement brand content. Primary decision variable is price per gram — a metric PPC cannot win on at ₹605. High churn. Low differentiation. This segment treats the brand as a commodity before the first purchase. Building it further deepens the problem.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">02</div>
+          <h4>Should Own — Primary Target</h4>
+          <p>Urban professional, 25–38. Protein-aware but not protein-obsessed. Not tracking macros. Wants one smarter snacking decision per day, not a lifestyle overhaul. Will pay ₹605 if the brand has earned it. High LTV. Repeat buyer. Identity-driven — stays because the product says something about who they are, not because the price held.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">03</div>
+          <h4>Most Underserved — Health-Conscious Parent</h4>
+          <p>28–42. Highest basket value in the category. Strongest loyalty. Looking for better snack decisions for the household without becoming a nutrition fundamentalist. The gifting dimension of the product was entirely absent from content — a ₹605 pack of clean-label edamame is a gift that signals both taste and care simultaneously.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">×</div>
+          <h4>Deprioritise — Macro-Fitness Audience</h4>
+          <p>High customer acquisition cost. Low loyalty. They evaluate the brand the same way they evaluate protein powder: grams per rupee. That competitive frame erodes premium positioning with every interaction. A brand that chases this audience trains itself out of the premium tier.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTENT STRATEGY LAYER ── -->
+    <div class="cs-content-header">
+      <span class="cs-content-header-label">Content Strategy Layer</span>
+      <div class="cs-content-header-rule"></div>
+    </div>
+
+    <h3 class="cs-content-title">A Five-Pillar <em>Trust Architecture</em></h3>
+    <p class="cs-content-intro">PPC's content problem was not volume — it was sequence. The brand was publishing conversion-intent content before trust had been established. A ₹605 product from an unfamiliar brand requires the audience to pass through belief before it can pass through purchase. The five-pillar system is a trust architecture first, a content calendar second. Each pillar addresses a specific gap in the brand's ability to earn the price it was already charging.</p>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Five Content Pillars — What Each One Closes</div>
+
+      <div class="cs-pillar-list">
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Pillar 01 — The Protein Truth</div>
+          <div class="cs-pillar-body">The 46g claim is genuinely extraordinary — it rivals whey protein density from a roasted bean that tastes like a snack. The failure was announcing it, not demonstrating it. Protein math carousels, cost-per-gram comparisons against bars and shakes, side-by-side office vending machine breakdowns — this is the content that turns a number into a felt reality. The buyer who saves this post has already started justifying the price to themselves before they have opened the website.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Pillar 02 — The Crunch Moment</div>
+          <div class="cs-pillar-body">The fastest commercial mistake a food brand can make is making people think about their product instead of want it. Craving content — ASMR close-ups, blind taste tests, desk snack moments, flavour character reels — has one job: trigger the desire to eat this right now. PPC's BBQ and Mexicano flavour range signals taste-first intent correctly. The content was not honouring that intent. Bold visual texture and high contrast, not soft-lit wellness photography. Health follows craving as evidence. It should never arrive as the opening argument.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Pillar 03 — The Real People Proof</div>
+          <div class="cs-pillar-body">This is where the ₹605 price gap closes. A bold nutrition claim from an unfamiliar brand produces scepticism before it produces belief. The roasting process that earns the premium price point needs to be shown — not claimed. The founder's pivot from Fit &amp; Flex to PPC is a sharp, credible market-reading narrative that was sitting entirely off the account. Three unscripted founder reels — why edamame, what he refused to add, what he is still improving — build more brand authority than any volume of product shots. Process cannot be fabricated after the fact. That is precisely why it builds trust no competitor can replicate.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Pillar 04 — The Identity Signal</div>
+          <div class="cs-pillar-body">A bag of edamame on your office desk is a social signal. The buyer who pulls out PPC in a meeting has made a visible choice — one that says something about who they are. That identity dimension of the product was entirely unexploited. Content that builds the "smarter snacker" archetype — desk snack culture, Pune pride, the difference between how most people snack and how a PPC buyer snacks — is the content that earns shares. People share content that says something flattering about them. This pillar is the brand's primary organic distribution engine, and it costs nothing to activate.</div>
+        </div>
+        <div class="cs-pillar-row">
+          <div class="cs-pillar-name">Pillar 05 — The Conversion Moment</div>
+          <div class="cs-pillar-body">The most critical sequencing rule: never attach a purchase push to trust-building content. It cheapens both. Conversion posts — bundle breakdowns, the 25g trial pack positioned as "not sure yet? try this first," DM highlights — work only after pillars one through four have done their job. The ₹55–60 trial pack at 25g is not a discount SKU. It is the trust gateway the ₹605 price requires. That positioning distinction changes everything about how it is framed in content.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">What Content Must Stop vs. What Replaces It</div>
+      <div class="cs-split">
+        <div class="cs-split-col doesnt-col">
+          <div class="cs-split-col-label doesnt">Content That Burns Positioning</div>
+          <ul>
+            <li>Nutrition statistics repeated across formats — the number alone is not the story and repetition does not make it one</li>
+            <li>Generic gym-adjacent visual language — it recruits the wrong audience and trains the algorithm toward them</li>
+            <li>Festival and occasion content without a brand point of view — it registers as an account without identity</li>
+            <li>Long informational captions — they signal a brand that does not trust its own product enough to let it speak</li>
+            <li>Conversion-intent posts before trust is built — the purchase push before the belief push cheapens both</li>
+          </ul>
+        </div>
+        <div class="cs-split-col works-col">
+          <div class="cs-split-col-label works">Content That Builds Premium Authority</div>
+          <ul>
+            <li>Protein math made visual — the 46g claim demonstrated, not announced, so the buyer calculates the value themselves</li>
+            <li>Process visibility — roasting, sourcing, ingredient selection — shown unscripted so it cannot be dismissed as marketing</li>
+            <li>Unscripted founder presence — why edamame, what he refused to add, what he is still improving</li>
+            <li>Craving-first content — taste, texture, and desire leading every reel before any health context arrives</li>
+            <li>Identity-signal content — the desk snack, the gifting moment, the Pune pride frame — designed to be shared because it reflects well on the person sharing it</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Key Strategic Decisions</div>
+      <div class="cs-decisions">
+        <div class="cs-decision">
+          <div class="cs-decision-num">01</div>
+          <h4>Category Ownership Before Category Volume</h4>
+          <p>There is no dominant edamame snack brand in India. That is not a market gap — it is a category-definition opportunity that compounds only if one brand moves with intent. PPC is positioned to own "edamame as daily snacking habit" in Indian urban markets before any well-funded competitor decides the category is worth entering. The content system must build the category story alongside the brand story. A larger brand will inherit the cultural work PPC does if PPC does not claim it explicitly.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">02</div>
+          <h4>The Trial Gateway Architecture</h4>
+          <p>₹605 is a high first-purchase commitment for a brand the buyer does not yet have a relationship with. The 25g pack at ₹55–60 is not a discount play — it is a trust architecture decision. Framed as "not sure yet? try this first," it removes the primary conversion barrier without creating a discount perception of the full-price product. Brands that sequence this correctly find that trial buyers convert to full-pack buyers at rates that make the trial investment straightforwardly worthwhile.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">03</div>
+          <h4>Deliberate Audience Migration</h4>
+          <p>Actively deprioritising the fitness-macro-influencer audience is a counterintuitive recommendation for a protein brand. It is the correct one. This segment's primary decision variable is price per gram — a frame in which PPC cannot win sustainably at ₹605, and should not try to. The urban professional audience requires different content, different creator partnerships, and a different emotional register. The migration must be deliberate: drifting out of the fitness audience while drifting into the professional-snacker audience produces six months of confused positioning rather than a clean shift.</p>
+        </div>
+        <div class="cs-decision">
+          <div class="cs-decision-num">04</div>
+          <h4>Process Visibility as Permanent Infrastructure</h4>
+          <p>The roasting process that explains the premium price and proves the clean-label claim has never been shown on the account. This is not a content gap — it is a trust infrastructure gap. Content showing the actual production process should function as permanent pinned material, not a single post. A buyer who has seen the process once does not question the price again. In a category full of brands making identical claims, process visibility is the only proof that cannot be manufactured after the fact — and therefore the only proof that performs the work it claims to perform.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-callout">
+      <p>"The brand does not need more posts. It needs one great post per week that makes someone stop, feel something, and share it — because it says something true about who they are. Start there."</p>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Implication</div>
+      <p>PPC's strategic problem is not awareness and it is not the product. It is the gap between what the product actually is and what the brand currently communicates about itself. A 46g plant protein snack that rivals whey density, made by a founder who read the market clearly enough to pivot into an empty category, priced at a premium that the product's quality fully supports — this brand has the architecture for a serious position. It is currently spending that architecture on content that disappears into the feed. The work is not to post more. It is to build a content system that makes the truth feel as remarkable as it actually is.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── POV ───────────────────────────────────────── -->
+<section id="pov">
+  <div class="section-label">Point of View</div>
+  <h2 class="section-heading reveal">Strategy should reduce<br>confusion. Always.</h2>
+
+  <div class="pov-grid">
+    <div class="pov-card reveal reveal-delay-1">
+      <div class="pov-brand">On Legacy Brands</div>
+      <h3>The proof exists. The language doesn't.</h3>
+      <p>Most legacy brands have earned trust they have never learned to communicate. The gap is not credibility — it is articulation. Sixty years of sourcing knowledge that lives only in the founder's head is a competitive moat that no consumer can see.</p>
+      <span class="pov-implication">The strategy is translation, not invention.</span>
+    </div>
+    <div class="pov-card reveal reveal-delay-2">
+      <div class="pov-brand">On Early-Stage Brands</div>
+      <h3>Name the solution state before you name the problem.</h3>
+      <p>Founders are almost always more fluent in the problem they solve than the feeling they deliver. The most urgent brand work for early-stage companies is building precise language for what good looks like — not more diagnosis of what's broken.</p>
+      <span class="pov-implication">"Sorted" is a brand strategy. "Decision fatigue" is a brief.</span>
+    </div>
+    <div class="pov-card reveal reveal-delay-3">
+      <div class="pov-brand">On Positioning</div>
+      <h3>Ownable beats premium. Every time.</h3>
+      <p>Claiming "premium quality" without proof is noise. Every competitor in every category says this. A claim is only as strong as the evidence behind it — and evidence is only useful if no competitor can replicate the same proof.</p>
+      <span class="pov-implication">The best positioning is a fact your competitors cannot truthfully copy.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────── -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="about-initials">AJ</div>
+      <div class="about-title">Brand Strategist &amp;<br>Positioning Consultant</div>
+      <div class="about-location">Pune, India · Open to consulting &amp; full-time</div>
+
+      <div class="about-credentials">
+        <div class="credential-row">
+          <span>JB &amp; Co. (Sociomunk)</span>
+          <span>Project Based</span>
+        </div>
+        <div class="credential-row">
+          <span>Social Basket (Sociomunk)</span>
+          <span>Project Based</span>
+        </div>
+        <div class="credential-row">
+          <span>CareDiabetics</span>
+          <span>Co-Founder · 2024–25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right reveal reveal-delay-2">
+      <p>I build brand strategy from the ground up — <strong>positioning, audience architecture, verbal identity, and go-to-market logic.</strong> My work lives at the intersection of consumer psychology, competitive insight, and communication systems.</p>
+      <p>I've worked across early-stage startups and legacy businesses, translating <strong>founder instinct into defensible brand decisions.</strong> I think before I write. I write to move people toward action.</p>
+      <p>Before advising brands, I co-founded CareDiabetics — a subscription-based diabetic care platform. That experience of <strong>building from zero, in a high-trust-barrier category, with no budget</strong>, is the clearest lens I have on what brand strategy actually has to do.</p>
+
+      <div class="about-note">
+        <p>Strategy should reduce confusion. The best brands are not the loudest. They are the clearest. Good strategy helps people decide faster, trust easier, and stay longer. Most brand problems are not communication problems. They are clarity problems.</p>
+        <p style="margin-top: 16px;">That is the work I care about. Not campaigns. Not aesthetics. Not the creative brief. The thinking that comes before all of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-label">Let's Talk Strategy</div>
+  <h2 class="contact-heading reveal">Have a brand<br>that needs <em>clarity?</em></h2>
+
+  <div class="contact-links reveal reveal-delay-1">
+    <a href="mailto:atharvj202@gmail.com" class="contact-link">
+      <span class="contact-link-label">Email</span>
+      <span class="contact-link-value">atharvj202@gmail.com</span>
+    </a>
+    <a href="https://linkedin.com/in/atharv-joshi-0302aa230" target="_blank" class="contact-link">
+      <span class="contact-link-label">LinkedIn</span>
+      <span class="contact-link-value">linkedin.com/in/atharvjoshi</span>
+    </a>
+    <a href="tel:+919763139329" class="contact-link">
+      <span class="contact-link-label">Phone</span>
+      <span class="contact-link-value">+91 97631 39329</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Atharv Joshi</p>
+  <p>Strategy-first. Execution-ready.</p>
+</footer>
+
+<script>
+/* ── CURSOR ─────────────────────────────────── */
+const dot  = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top  = my + 'px';
+});
+
+(function animateCursor() {
+  rx += (mx - rx) * 0.1;
+  ry += (my - ry) * 0.1;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animateCursor);
+})();
+
+document.querySelectorAll('a, button, .work-item, .think-card, .pov-card').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+});
+
+document.addEventListener('mousedown', () => ring.classList.add('clicked'));
+document.addEventListener('mouseup',   () => ring.classList.remove('clicked'));
+
+/* ── NAV SCROLL ─────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ── SCROLL REVEAL ──────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── MAGNETIC BUTTON ───────────────────────── */
+document.querySelectorAll('.btn-primary').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top  + rect.height / 2;
+    const dx = (e.clientX - cx) * 0.25;
+    const dy = (e.clientY - cy) * 0.25;
+    btn.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+/* ── CASE STUDY OPEN/CLOSE ──────────────────── */
+const mainSections = ['hero','think','work','pov','about','contact'];
+
+function openCase(id) {
+  mainSections.forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.style.display = 'none';
+  });
+  document.querySelector('footer').style.display = 'none';
+
+  // Hide any previously open case study
+  document.querySelectorAll('.case-study').forEach(cs => cs.style.display = 'none');
+
+  const cs = document.getElementById('cs-' + id);
+  if (cs) {
+    cs.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function closeCase() {
+  document.querySelectorAll('.case-study').forEach(cs => cs.style.display = 'none');
+  mainSections.forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.style.display = '';
+  });
+  document.querySelector('footer').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
