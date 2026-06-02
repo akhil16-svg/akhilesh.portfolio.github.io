@@ -87,17 +87,17 @@ export default function About() {
             style={{ marginBottom: '2rem' }}
           >
             <div style={{
-              width: 180,
-              height: 180,
+              width: 260,
+              height: 260,
               borderRadius: '50%',
-              border: '1.5px solid rgba(197,169,106,0.3)',
-              padding: 4,
+              border: '1.5px solid rgba(197,169,106,0.35)',
+              padding: 5,
               marginBottom: '1.5rem',
             }}>
               <img
                 src="/profile.png"
                 alt="Akhilesh Pingle"
-                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', filter: 'grayscale(15%)' }}
+                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', filter: 'grayscale(10%)' }}
               />
             </div>
           </motion.div>

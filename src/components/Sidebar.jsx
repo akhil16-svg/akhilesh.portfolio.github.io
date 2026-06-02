@@ -95,20 +95,36 @@ export default function Sidebar() {
       <aside className="sidebar">
         {/* ── Profile ─────────────────────────────── */}
         <div className="sidebar-profile">
-          <div className="profile-ring">
+          {/* Profile photo — doubled size to 176px */}
+          <div style={{
+            width: 176,
+            height: 176,
+            borderRadius: '50%',
+            border: '1.5px solid rgba(197,169,106,0.45)',
+            padding: 4,
+            marginBottom: '1.25rem',
+            flexShrink: 0,
+          }}>
             <img
               src="/profile.png"
               alt={`${PROFILE_NAME} profile photo`}
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                filter: 'grayscale(10%)',
+              }}
             />
           </div>
           <div>
             <p
               className="font-display"
-              style={{ fontSize: '1.05rem', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.2 }}
+              style={{ fontSize: '1.15rem', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.2 }}
             >
               {PROFILE_NAME}
             </p>
-            <p style={{ fontSize: '0.6875rem', color: 'var(--text-muted)', letterSpacing: '0.08em', marginTop: '0.25rem' }}>
+            <p style={{ fontSize: '0.6875rem', color: 'var(--text-muted)', letterSpacing: '0.08em', marginTop: '0.3rem' }}>
               {PROFILE_TAGLINE}
             </p>
           </div>
