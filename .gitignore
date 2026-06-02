@@ -24,3 +24,9 @@ screenshots
 *.njsproj
 *.sln
 *.sw?
+
+# Security — never commit these
+Portfolio_SSH_Key.png
+PotfolioToken.txt
+*.pem
+*.key
