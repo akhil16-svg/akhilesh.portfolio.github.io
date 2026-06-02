@@ -1,10 +1,10 @@
 /**
  * About.jsx
  * ───────────────────────────────────────────────────────
- * About Me section with profile photo, bio text, and key credentials.
+ * About Me section — bio text, strengths, and credentials.
+ * Profile photo is shown only once in the sidebar.
  *
  * TO CUSTOMISE:
- *   • Photo       → replace /profile.png in /public/
  *   • Bio text    → edit BIO_PARAGRAPHS below
  *   • Credentials → edit CREDENTIALS array
  *   • Strengths   → edit STRENGTHS array
@@ -25,21 +25,25 @@ const CREDENTIALS = [
     label: 'AWS Certified Solutions Architect',
     value: 'Associate · Active credential',
     icon: ShieldCheck,
+    color: '#d97c2e',
   },
   {
     label: 'Master of Science, Computer Science',
     value: 'Cal State East Bay · 2023–2025',
     icon: GraduationCap,
+    color: '#3b7fd4',
   },
   {
     label: 'IBM Back-End Development',
     value: 'Coursera · Completed',
     icon: Award,
+    color: '#3db87a',
   },
   {
     label: 'Location',
     value: 'San Francisco Bay Area, CA',
     icon: MapPin,
+    color: '#c5a96a',
   },
 ]
 
@@ -53,7 +57,10 @@ const STRENGTHS = [
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
-  show: (i) => ({ opacity: 1, y: 0, transition: { duration: 0.65, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] } }),
+  show: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.65, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
 }
 
 export default function About() {
@@ -74,42 +81,17 @@ export default function About() {
         About Me
       </motion.span>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '4rem', alignItems: 'start' }}>
 
-        {/* Left col — Profile + Bio */}
+        {/* Left col — Headline + Bio + Strengths */}
         <div>
-          {/* Profile photo */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate={inView ? 'show' : 'hidden'}
-            custom={1}
-            style={{ marginBottom: '2rem' }}
-          >
-            <div style={{
-              width: 260,
-              height: 260,
-              borderRadius: '50%',
-              border: '1.5px solid rgba(197,169,106,0.35)',
-              padding: 5,
-              marginBottom: '1.5rem',
-            }}>
-              <img
-                src="/profile.png"
-                alt="Akhilesh Pingle"
-                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', filter: 'grayscale(10%)' }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Headline */}
           <motion.h2
             className="display-md"
             variants={fadeUp}
             initial="hidden"
             animate={inView ? 'show' : 'hidden'}
-            custom={2}
-            style={{ marginBottom: '1.5rem' }}
+            custom={1}
+            style={{ marginBottom: '1.75rem' }}
           >
             Practical engineering,<br />
             <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>backend-first mindset.</span>
@@ -122,8 +104,8 @@ export default function About() {
               variants={fadeUp}
               initial="hidden"
               animate={inView ? 'show' : 'hidden'}
-              custom={3 + i}
-              style={{ fontSize: '0.9375rem', lineHeight: 1.85, color: 'var(--text-muted)', marginBottom: '1rem' }}
+              custom={2 + i}
+              style={{ fontSize: '0.9375rem', lineHeight: 1.9, color: 'var(--text-muted)', marginBottom: '1rem' }}
             >
               {para}
             </motion.p>
@@ -134,17 +116,22 @@ export default function About() {
             variants={fadeUp}
             initial="hidden"
             animate={inView ? 'show' : 'hidden'}
-            custom={5}
-            style={{ marginTop: '2rem' }}
+            custom={4}
+            style={{ marginTop: '2.25rem' }}
           >
-            <p className="section-label" style={{ marginBottom: '1rem' }}>Core strengths</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+            <p className="section-label" style={{ marginBottom: '1.1rem' }}>Core strengths</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {STRENGTHS.map((s, i) => (
-                <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                  <span style={{ width: 20, height: 20, borderRadius: '50%', border: '1px solid rgba(197,169,106,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)' }} />
+                <div key={i} style={{ display: 'flex', gap: '0.875rem', alignItems: 'flex-start' }}>
+                  <span style={{
+                    width: 22, height: 22, borderRadius: '50%',
+                    border: '1px solid rgba(197,169,106,0.3)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0, marginTop: 2,
+                  }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', display: 'block' }} />
                   </span>
-                  <p style={{ fontSize: '0.875rem', lineHeight: 1.7, color: 'var(--text-muted)' }}>{s}</p>
+                  <p style={{ fontSize: '0.875rem', lineHeight: 1.75, color: 'var(--text-muted)' }}>{s}</p>
                 </div>
               ))}
             </div>
@@ -152,36 +139,25 @@ export default function About() {
         </div>
 
         {/* Right col — Credentials */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate={inView ? 'show' : 'hidden'}
-          custom={2}
-          style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-        >
-          {CREDENTIALS.map(({ label, value, icon: Icon }, i) => (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {CREDENTIALS.map(({ label, value, icon: Icon, color }, i) => (
             <motion.div
               key={label}
               variants={fadeUp}
               initial="hidden"
               animate={inView ? 'show' : 'hidden'}
-              custom={3 + i}
+              custom={2 + i}
               className="card"
               style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}
             >
               <div style={{
-                width: 42,
-                height: 42,
-                borderRadius: 10,
-                background: 'rgba(197,169,106,0.08)',
-                border: '1px solid rgba(197,169,106,0.15)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--accent)',
-                flexShrink: 0,
+                width: 40, height: 40, borderRadius: 9,
+                background: `${color}14`,
+                border: `1px solid ${color}28`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color, flexShrink: 0,
               }}>
-                <Icon size={18} />
+                <Icon size={17} />
               </div>
               <div>
                 <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>{label}</p>
@@ -195,32 +171,29 @@ export default function About() {
             variants={fadeUp}
             initial="hidden"
             animate={inView ? 'show' : 'hidden'}
-            custom={8}
+            custom={7}
             style={{
-              background: 'rgba(197,169,106,0.06)',
-              border: '1px solid rgba(197,169,106,0.18)',
-              borderRadius: 16,
-              padding: '1.5rem',
-              marginTop: '0.5rem',
+              background: 'rgba(197,169,106,0.05)',
+              border: '1px solid rgba(197,169,106,0.16)',
+              borderRadius: 16, padding: '1.5rem', marginTop: '0.25rem',
             }}
           >
             <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
               Currently seeking
             </p>
-            <p style={{ fontSize: '0.9rem', lineHeight: 1.75, color: 'var(--text-muted)' }}>
+            <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--text-muted)' }}>
               Backend, cloud, and AI application roles where I can build scalable APIs,
               cloud-ready services, and AI tools that solve real business problems.
             </p>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Responsive: stack on mobile */}
       <style>{`
         @media (max-width: 768px) {
           #about > div:nth-child(2) {
             grid-template-columns: 1fr !important;
-            gap: 2rem !important;
+            gap: 2.5rem !important;
           }
         }
       `}</style>

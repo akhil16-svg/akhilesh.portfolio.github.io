@@ -5,7 +5,7 @@
  * Collapses to a top navbar with hamburger menu on mobile.
  *
  * TO CUSTOMISE:
- *   • Profile photo   → replace /profile.png in /public/
+ *   • Profile photo   → replace /profile.jpg in /public/
  *   • Name / tagline  → update PROFILE_NAME and PROFILE_TAGLINE below
  *   • Nav sections    → edit NAV_LINKS array
  *   • Resume link     → edit RESUME_HREF
@@ -106,7 +106,7 @@ export default function Sidebar() {
             flexShrink: 0,
           }}>
             <img
-              src="/profile.png"
+              src="/profile.jpg"
               alt={`${PROFILE_NAME} profile photo`}
               style={{
                 width: '100%',

@@ -67,9 +67,10 @@ body {
   left: 0;
   width: var(--sidebar-w);
   height: 100vh;
-  background: rgba(10, 12, 16, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  /* More translucent so the global mountain bg shows through subtly */
+  background: rgba(10, 12, 16, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
