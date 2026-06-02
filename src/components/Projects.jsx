@@ -1,174 +1,270 @@
+/**
+ * Projects.jsx
+ * ───────────────────────────────────────────────────────
+ * Project cards with hover-preview effect.
+ * • Default state: title, tags, description
+ * • Hover state  : preview image fades in + GitHub link overlay
+ * • Click        : opens GitHub repo in new tab
+ *
+ * TO CUSTOMISE:
+ *   • Add/edit projects → edit the PROJECTS array below
+ *   • Preview images    → add images to /public/projects/ folder
+ *     and set the `preview` field to the path (e.g. '/projects/invoiceai.png')
+ *     For video previews, set `previewVideo` to the .mp4 path.
+ *   • Leave `preview` as null to show a styled placeholder instead.
+ */
+
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { BarChart3, Bot, ExternalLink, FileStack, Globe2, Home, Sparkles } from 'lucide-react'
-import { GithubIcon } from './BrandIcons'
+import { ArrowUpRight, ExternalLink } from 'lucide-react'
 
-const projects = [
+/* ── EDITABLE CONTENT ─────────────────────────────── */
+const PROJECTS = [
   {
+    id: 'invoiceai',
     title: 'InvoiceAI',
     subtitle: 'Invoice intelligence platform',
-    description:
-      'AI platform for invoice OCR, fraud checks, and financial analytics with a Python backend, PostgreSQL data layer, Streamlit interface, and Docker-based setup.',
-    tags: ['Python', 'Streamlit', 'PostgreSQL', 'Docker', 'OCR'],
+    description: 'AI platform for invoice OCR, fraud detection, and financial analytics. Python backend, PostgreSQL data layer, Streamlit interface, Docker setup.',
+    tags: ['Python', 'PostgreSQL', 'Docker', 'OCR', 'Streamlit'],
     github: 'https://github.com/akhil16-svg/InvoiceAI',
-    icon: FileStack,
-    accent: 'bg-blue-600',
+    demo: null,
+    preview: null,           // → add '/projects/invoiceai.png' when available
+    previewVideo: null,      // → add '/projects/invoiceai.mp4' for video preview
+    accentColor: '#3b7fd4',  // card accent stripe color
   },
   {
+    id: 'medical-chatbot',
     title: 'Medical Assistant Chatbot',
     subtitle: 'AI assistant prototype',
-    description:
-      'Python chatbot prototype that answers health-related questions from a local knowledge base, built to explore retrieval-style assistant workflows.',
-    tags: ['Python', 'Chatbot', 'AI Assistant', 'Knowledge Base'],
+    description: 'Python chatbot that answers health-related questions from a local knowledge base, exploring retrieval-style assistant workflows.',
+    tags: ['Python', 'LangChain', 'RAG', 'Knowledge Base'],
     github: 'https://github.com/akhil16-svg/Medical-Assistant-Chatbot',
-    icon: Bot,
-    accent: 'bg-teal-600',
+    demo: null,
+    preview: null,
+    previewVideo: null,
+    accentColor: '#3db87a',
   },
   {
+    id: 'walmart-forecasting',
     title: 'Forecasting Walmart Sales',
-    subtitle: 'Forecasting and analytics',
-    description:
-      'Jupyter and Python project for forecasting Walmart sales with data preprocessing, feature engineering, and regression-based modeling.',
+    subtitle: 'Forecasting & analytics',
+    description: 'Jupyter/Python project for forecasting Walmart sales with data preprocessing, feature engineering, and regression-based modelling.',
     tags: ['Python', 'Jupyter', 'Forecasting', 'Regression'],
     github: 'https://github.com/akhil16-svg/Forecasting-Walmart-Sales',
-    icon: BarChart3,
-    accent: 'bg-orange-500',
+    demo: null,
+    preview: null,
+    previewVideo: null,
+    accentColor: '#d97c2e',
   },
   {
+    id: 'real-estate',
     title: 'Real Estate Platform',
     subtitle: 'Full-stack web app',
-    description:
-      'Property listing and search platform focused on full-stack workflows, responsive UI, listing management, and clean project structure.',
-    tags: ['JavaScript', 'Full Stack', 'Web App', 'Listings'],
+    description: 'Property listing and search platform with responsive UI, listing management, and clean full-stack project structure.',
+    tags: ['JavaScript', 'Full Stack', 'Web App'],
     github: 'https://github.com/akhil16-svg/Real-Estate-Platform',
-    icon: Home,
-    accent: 'bg-indigo-600',
+    demo: null,
+    preview: null,
+    previewVideo: null,
+    accentColor: '#7c5cd9',
   },
   {
+    id: 'portfolio',
     title: 'Portfolio Website',
     subtitle: 'Personal portfolio',
-    description:
-      'React and Tailwind portfolio site for presenting backend, cloud, AI, education, and professional experience in one polished place.',
-    tags: ['React', 'Tailwind', 'Vite', 'GitHub Pages'],
+    description: 'This portfolio — built with React, Tailwind, Vite, Framer Motion, and deployed via GitHub Pages.',
+    tags: ['React', 'Tailwind', 'Vite', 'Framer Motion'],
     github: 'https://github.com/akhil16-svg/akhilesh.portfolio.github.io',
     demo: 'https://akhil16-svg.github.io/akhilesh.portfolio.github.io/',
-    icon: Globe2,
-    accent: 'bg-slate-950',
+    preview: null,
+    previewVideo: null,
+    accentColor: '#c5a96a',
   },
 ]
+/* ── END EDITABLE CONTENT ─────────────────────────── */
+
+function ProjectCard({ project, index, inView }) {
+  return (
+    <motion.a
+      href={project.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="project-card"
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+      style={{ display: 'block', textDecoration: 'none', minHeight: 320 }}
+      aria-label={`${project.title} — open GitHub repository`}
+    >
+      {/* Default info layer */}
+      <div className="project-card-info" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        {/* Accent stripe */}
+        <div style={{ width: '100%', height: 2, borderRadius: 1, background: project.accentColor, opacity: 0.7, marginBottom: '1.5rem' }} />
+
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+          <div>
+            <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
+              {project.subtitle}
+            </p>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.2 }}>
+              {project.title}
+            </h3>
+          </div>
+          <ArrowUpRight size={18} style={{ color: 'var(--text-dim)', flexShrink: 0, marginTop: 4 }} />
+        </div>
+
+        {/* Description */}
+        <p style={{ fontSize: '0.875rem', lineHeight: 1.75, color: 'var(--text-muted)', flex: 1, marginBottom: '1.5rem' }}>
+          {project.description}
+        </p>
+
+        {/* Tags */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
+          {project.tags.map(tag => (
+            <span key={tag} className="skill-tag">{tag}</span>
+          ))}
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 3,
+                fontSize: '0.6875rem', color: 'var(--accent)', textDecoration: 'none',
+                borderBottom: '1px solid rgba(197,169,106,0.3)',
+                marginLeft: '0.25rem', paddingBottom: 1,
+              }}
+            >
+              Live demo <ExternalLink size={11} />
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Hover preview layer */}
+      <div className="project-card-preview">
+        {project.previewVideo ? (
+          <video
+            src={project.previewVideo}
+            autoPlay loop muted playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : project.preview ? (
+          <img src={project.preview} alt={`${project.title} preview`} />
+        ) : (
+          /* Stylised placeholder when no preview asset is available yet */
+          <div style={{
+            width: '100%', height: '100%', minHeight: 320,
+            background: `linear-gradient(135deg, #0e1016 0%, #14171e 100%)`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <span style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(3rem, 8vw, 5rem)',
+              fontWeight: 300,
+              fontStyle: 'italic',
+              color: 'rgba(197,169,106,0.15)',
+              letterSpacing: '0.05em',
+            }}>
+              {project.title}
+            </span>
+          </div>
+        )}
+
+        {/* Gradient overlay */}
+        <div className="project-card-preview-overlay" />
+
+        {/* Bottom label */}
+        <div className="project-card-preview-label">
+          <div>
+            <p style={{ fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(197,169,106,0.8)', marginBottom: '0.25rem' }}>
+              {project.subtitle}
+            </p>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.3rem', fontWeight: 400, color: 'var(--text-primary)' }}>
+              {project.title}
+            </p>
+          </div>
+          <div style={{
+            width: 40, height: 40, borderRadius: '50%',
+            background: 'rgba(197,169,106,0.15)',
+            border: '1px solid rgba(197,169,106,0.3)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: 'var(--accent)',
+          }}>
+            <ArrowUpRight size={18} />
+          </div>
+        </div>
+      </div>
+    </motion.a>
+  )
+}
 
 export default function Projects() {
-  const ref = useRef(null)
+  const ref    = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="projects" className="bg-white px-5 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55 }}
-          className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end"
-        >
-          <div className="max-w-3xl">
-            <span className="text-sm font-bold text-blue-700">Projects</span>
-            <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-              A portfolio focused on real systems.
-            </h2>
-          </div>
-          <p className="max-w-md text-sm leading-6 text-slate-500">
-            Selected work across backend APIs, AI-assisted workflows, forecasting, and full-stack product builds.
-          </p>
-        </motion.div>
+    <section id="projects" className="section" ref={ref}>
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        style={{ marginBottom: '3rem' }}
+      >
+        <span className="section-label" style={{ display: 'block', marginBottom: '1rem' }}>Projects</span>
+        <h2 className="display-lg" style={{ maxWidth: 600, marginBottom: '1rem' }}>
+          A portfolio built on<br />
+          <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>real systems.</span>
+        </h2>
+        <p style={{ fontSize: '0.9375rem', color: 'var(--text-muted)', maxWidth: 560, lineHeight: 1.8 }}>
+          Selected work across backend APIs, AI-assisted workflows, forecasting, and full-stack product builds.
+          Hover over any card to preview the project.
+        </p>
+      </motion.div>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project, index) => {
-            const Icon = project.icon
-            return (
-              <motion.article
-                key={project.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.45, delay: index * 0.06 }}
-                className={`group flex min-h-[360px] flex-col rounded-2xl border border-slate-200 bg-[#f9fbfd] p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10 ${
-                  index < 2 ? 'xl:col-span-1' : ''
-                }`}
-              >
-                <div className="mb-6 flex items-start justify-between gap-4">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${project.accent} text-white shadow-sm`}>
-                    <Icon size={22} />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate-400 transition hover:text-slate-950"
-                      aria-label={`${project.title} GitHub repository`}
-                    >
-                      <GithubIcon size={18} />
-                    </a>
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-slate-400 transition hover:text-blue-700"
-                        aria-label={`${project.title} live website`}
-                      >
-                        <ExternalLink size={18} />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <div className="mb-2 text-sm font-bold text-blue-700">{project.subtitle}</div>
-                <h3 className="text-2xl font-black text-slate-950">{project.title}</h3>
-                <p className="mt-4 flex-1 text-sm leading-7 text-slate-600">{project.description}</p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-600">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
-            )
-          })}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.28 }}
-          className="mt-8 rounded-2xl border border-slate-200 bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10"
-        >
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-teal-300">
-                <Sparkles size={20} />
-              </div>
-              <div>
-                <h3 className="text-lg font-black">More work is being refined.</h3>
-                <p className="mt-1 text-sm leading-6 text-slate-300">
-                  Empty or early-stage repositories are being kept honest while the strongest projects stay front and center.
-                </p>
-              </div>
-            </div>
-            <a
-              href="https://github.com/akhil16-svg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50"
-            >
-              View GitHub
-              <ExternalLink size={16} />
-            </a>
-          </div>
-        </motion.div>
+      {/* Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem' }}>
+        {PROJECTS.map((project, i) => (
+          <ProjectCard key={project.id} project={project} index={i} inView={inView} />
+        ))}
       </div>
+
+      {/* Footer link */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        style={{ marginTop: '2.5rem', textAlign: 'center' }}
+      >
+        <a
+          href="https://github.com/akhil16-svg"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            fontSize: '0.8125rem', color: 'var(--text-muted)',
+            textDecoration: 'none', letterSpacing: '0.05em',
+            transition: 'color 0.2s ease',
+            borderBottom: '1px solid var(--border)',
+            paddingBottom: 2,
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+          onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+        >
+          View all on GitHub <ArrowUpRight size={14} />
+        </a>
+      </motion.div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          #projects > div:nth-child(2) {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

@@ -1,4 +1,10 @@
-import Navbar from './components/Navbar'
+/**
+ * App.jsx
+ * ───────────────────────────────────────────────────────
+ * Root layout — sidebar + main content.
+ */
+
+import Sidebar from './components/Sidebar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
@@ -10,18 +16,26 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#f6f8fb] text-slate-950">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Education />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <>
+      {/* Subtle cinematic grain overlay (CSS-only, no performance cost) */}
+      <div className="grain-overlay" aria-hidden="true" />
+
+      <div className="layout-wrapper">
+        {/* Fixed sidebar / top navbar */}
+        <Sidebar />
+
+        {/* Scrollable main content */}
+        <main className="main-content">
+          <Hero />
+          <About />
+          <Projects />
+          <Experience />
+          <Skills />
+          <Education />
+          <Contact />
+          <Footer />
+        </main>
+      </div>
+    </>
   )
 }

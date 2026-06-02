@@ -1,105 +1,170 @@
+/**
+ * Contact.jsx
+ * ───────────────────────────────────────────────────────
+ * Contact section with direct links.
+ *
+ * TO CUSTOMISE → edit EMAIL, LINKEDIN, GITHUB below
+ */
+
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, Mail, MapPin } from 'lucide-react'
+import { Mail, MapPin, ArrowRight } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './BrandIcons'
 
-const contactLinks = [
-  {
-    label: 'Email',
-    value: 'pingleakhil12@gmail.com',
-    href: 'mailto:pingleakhil12@gmail.com',
-    icon: Mail,
-  },
-  {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/linkakhil',
-    href: 'https://linkedin.com/in/linkakhil',
-    icon: LinkedinIcon,
-  },
-  {
-    label: 'GitHub',
-    value: 'github.com/akhil16-svg',
-    href: 'https://github.com/akhil16-svg',
-    icon: GithubIcon,
-  },
+/* ── EDITABLE CONTENT ─────────────────────────────── */
+const EMAIL    = 'pingleakhil12@gmail.com'
+const LINKEDIN = { label: 'linkedin.com/in/linkakhil', href: 'https://linkedin.com/in/linkakhil' }
+const GITHUB   = { label: 'github.com/akhil16-svg',   href: 'https://github.com/akhil16-svg' }
+const LOCATION = 'San Francisco Bay Area, CA — Open to on-site, hybrid, and remote roles.'
+/* ── END EDITABLE CONTENT ─────────────────────────── */
+
+const CONTACT_LINKS = [
+  { label: 'Email', value: EMAIL,           href: `mailto:${EMAIL}`,    icon: Mail },
+  { label: 'LinkedIn', value: LINKEDIN.label, href: LINKEDIN.href,        icon: LinkedinIcon },
+  { label: 'GitHub',   value: GITHUB.label,   href: GITHUB.href,          icon: GithubIcon },
 ]
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: i => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.55, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
+}
+
 export default function Contact() {
-  const ref = useRef(null)
+  const ref    = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="contact" className="bg-slate-950 px-5 py-24 text-white sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section id="contact" className="section" ref={ref}
+      style={{ background: 'linear-gradient(to bottom, var(--bg-base), #060709)' }}
+    >
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+
+        {/* Left: headline + CTA */}
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55 }}
-          className="grid gap-10 lg:grid-cols-[1fr_0.82fr]"
+          transition={{ duration: 0.65 }}
         >
-          <div>
-            <span className="text-sm font-bold text-teal-300">Contact</span>
-            <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">
-              Let&apos;s talk about backend, cloud, or AI application work.
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-              I am open to software engineering, backend development, cloud engineering,
-              and AI application roles. The fastest way to reach me is email or LinkedIn.
-            </p>
+          <span className="section-label" style={{ display: 'block', marginBottom: '1rem' }}>Get in Touch</span>
+          <h2 className="display-lg" style={{ marginBottom: '1.5rem' }}>
+            Let's talk<br />
+            <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>backend, cloud,<br/>or AI work.</span>
+          </h2>
+          <p style={{ fontSize: '0.9375rem', lineHeight: 1.85, color: 'var(--text-muted)', maxWidth: 440, marginBottom: '2.5rem' }}>
+            I'm open to software engineering, backend development, cloud engineering,
+            and AI application roles. The fastest way to reach me is email or LinkedIn.
+          </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="mailto:pingleakhil12@gmail.com"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5 hover:bg-blue-50"
-              >
-                <Mail size={17} />
-                Email Me
-              </a>
-              <a
-                href="https://linkedin.com/in/linkakhil"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-teal-300 hover:text-teal-200"
-              >
-                Connect on LinkedIn
-                <ArrowRight size={17} />
-              </a>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-6">
-            <div className="mb-6 flex items-start gap-3 rounded-xl bg-white/[0.06] p-4">
-              <MapPin size={19} className="mt-0.5 text-teal-300" />
-              <div>
-                <div className="text-sm font-bold">San Francisco Bay Area, CA</div>
-                <div className="mt-1 text-sm text-slate-300">Open to on-site, hybrid, and remote roles.</div>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              {contactLinks.map(({ label, value, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-teal-300/50 hover:bg-white/[0.08]"
-                >
-                  <div className="flex items-center gap-3">
-                    <Icon size={18} className="text-teal-300" />
-                    <div>
-                      <div className="text-xs font-bold text-slate-400">{label}</div>
-                      <div className="mt-0.5 text-sm font-semibold text-white">{value}</div>
-                    </div>
-                  </div>
-                  <ArrowRight size={16} className="text-slate-500" />
-                </a>
-              ))}
-            </div>
+          {/* Primary CTA buttons */}
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <a
+              href={`mailto:${EMAIL}`}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                background: 'var(--accent)',
+                color: '#0a0c10',
+                padding: '0.7rem 1.5rem',
+                borderRadius: 8,
+                fontSize: '0.8125rem', fontWeight: 600,
+                letterSpacing: '0.04em',
+                textDecoration: 'none',
+                transition: 'background 0.2s',
+                fontFamily: 'var(--font-body)',
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = '#dbb96f'}
+              onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}
+            >
+              <Mail size={15} /> Email Me
+            </a>
+            <a
+              href={LINKEDIN.href}
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                color: 'var(--text-muted)',
+                border: '1px solid var(--border)',
+                padding: '0.7rem 1.25rem',
+                borderRadius: 8,
+                fontSize: '0.8125rem', fontWeight: 500,
+                textDecoration: 'none',
+                transition: 'all 0.2s',
+                fontFamily: 'var(--font-body)',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.borderColor = 'var(--border-hover)' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border)' }}
+            >
+              LinkedIn <ArrowRight size={15} />
+            </a>
           </div>
         </motion.div>
+
+        {/* Right: link cards */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+          {/* Location */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate={inView ? 'show' : 'hidden'}
+            custom={0}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '0.75rem',
+              padding: '1rem 1.25rem',
+              border: '1px solid var(--border)',
+              borderRadius: 12,
+              background: 'var(--bg-card)',
+              marginBottom: '0.25rem',
+            }}
+          >
+            <MapPin size={17} style={{ color: 'var(--accent)', flexShrink: 0 }} />
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>{LOCATION}</p>
+          </motion.div>
+
+          {/* Contact link cards */}
+          {CONTACT_LINKS.map(({ label, value, href, icon: Icon }, i) => (
+            <motion.a
+              key={label}
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel="noopener noreferrer"
+              className="contact-link"
+              variants={fadeUp}
+              initial="hidden"
+              animate={inView ? 'show' : 'hidden'}
+              custom={i + 1}
+              aria-label={label}
+            >
+              <div style={{
+                width: 38, height: 38, borderRadius: 9,
+                background: 'rgba(197,169,106,0.07)',
+                border: '1px solid rgba(197,169,106,0.15)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--accent)', flexShrink: 0,
+              }}>
+                <Icon size={17} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '0.2rem' }}>
+                  {label}
+                </p>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>{value}</p>
+              </div>
+              <ArrowRight size={15} style={{ color: 'var(--text-dim)', flexShrink: 0 }} />
+            </motion.a>
+          ))}
+        </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #contact > div {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

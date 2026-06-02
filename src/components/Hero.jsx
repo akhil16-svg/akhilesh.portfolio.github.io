@@ -1,143 +1,139 @@
+/**
+ * Hero.jsx
+ * ───────────────────────────────────────────────────────
+ * Full-viewport hero with mountain background image.
+ * Text overlaid at the bottom of the image — cinematic style.
+ *
+ * TO CUSTOMISE:
+ *   • Background image → replace /mountain-bg.png in /public/
+ *   • Headline text    → edit HEADLINE and SUBHEADLINE
+ *   • Status badge     → edit STATUS_TEXT
+ *   • Quick-links      → edit QUICK_LINKS
+ */
+
 import { motion } from 'framer-motion'
-import { ArrowRight, Cloud, Database, Mail, MapPin, Server, ShieldCheck } from 'lucide-react'
-import { GithubIcon, LinkedinIcon } from './BrandIcons'
-import heroLayer from '../assets/hero.png'
+import { ArrowRight, MapPin } from 'lucide-react'
 
-const highlights = [
-  { label: 'AWS Certified', value: 'Solutions Architect Associate', icon: ShieldCheck },
-  { label: 'Backend Stack', value: 'Python, Flask, Django, REST APIs', icon: Server },
-  { label: 'Cloud Ready', value: 'Docker, Kubernetes, AWS, CI/CD', icon: Cloud },
-]
+/* ── EDITABLE CONTENT ─────────────────────────────── */
+const HEADLINE    = 'Building systems that scale.'
+const SUBHEADLINE = 'Python · AWS · REST APIs · AI Workflows'
+const STATUS_TEXT = 'Open to backend, cloud, and AI application roles'
 
-const systemLayers = [
-  { title: 'API Layer', detail: 'Flask, Django, REST', color: 'bg-blue-600' },
-  { title: 'Data Layer', detail: 'SQL, PostgreSQL', color: 'bg-teal-600' },
-  { title: 'Deploy Layer', detail: 'AWS, Docker, K8s', color: 'bg-orange-500' },
+const QUICK_LINKS = [
+  { label: 'View Projects', href: '#projects' },
+  { label: 'Work Experience', href: '#experience' },
+  { label: 'Contact Me', href: '#contact' },
 ]
+/* ── END EDITABLE CONTENT ─────────────────────────── */
+
+const scrollTo = (href) => {
+  const el = document.querySelector(href)
+  if (el) el.scrollIntoView({ behavior: 'smooth' })
+}
 
 export default function Hero() {
-  const scrollToProjects = (event) => {
-    event.preventDefault()
-    document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
-    <section id="hero" className="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 pb-16 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 -z-10 bg-[#f6f8fb]" />
-      <div className="absolute inset-0 -z-10 opacity-70 [background-image:linear-gradient(#dbeafe_1px,transparent_1px),linear-gradient(90deg,#dbeafe_1px,transparent_1px)] [background-size:72px_72px]" />
-      <div className="absolute inset-x-0 top-0 -z-10 h-56 bg-gradient-to-b from-blue-100 via-teal-50 to-transparent" />
+    <section id="hero" className="hero-section" style={{ minHeight: '100vh' }}>
+      {/* Background mountain image */}
+      <div className="hero-bg">
+        <img src="/mountain-bg.png" alt="Atmospheric mountain landscape" />
+      </div>
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.88fr]">
+      {/* Content at the bottom */}
+      <div className="hero-content" style={{ width: '100%', maxWidth: 820 }}>
+        {/* Status badge */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          style={{ marginBottom: '1.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            Open to backend, cloud, and AI application roles
-          </div>
-
-          <h1 className="max-w-4xl text-5xl font-black leading-[1.02] text-slate-950 sm:text-6xl lg:text-7xl">
-            Building backend systems that are useful, secure, and ready to scale.
-          </h1>
-
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            I am Akhilesh Pingle, a software engineer focused on Python backend development,
-            AWS architecture, REST APIs, SQL systems, and AI-powered product workflows.
-          </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#projects"
-              onClick={scrollToProjects}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-blue-700"
-            >
-              View Projects
-              <ArrowRight size={17} />
-            </a>
-            <a
-              href="mailto:pingleakhil12@gmail.com"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-700"
-            >
-              <Mail size={17} />
-              Contact Me
-            </a>
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-5 text-sm font-semibold text-slate-500">
-            <span className="inline-flex items-center gap-2">
-              <MapPin size={16} className="text-blue-700" />
-              San Francisco Bay Area
-            </span>
-            <a href="https://github.com/akhil16-svg" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-slate-950">
-              <GithubIcon size={17} />
-              GitHub
-            </a>
-            <a href="https://linkedin.com/in/linkakhil" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-blue-700">
-              <LinkedinIcon size={17} />
-              LinkedIn
-            </a>
-          </div>
-
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
-            {highlights.map(({ label, value, icon: Icon }, index) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.1 + index * 0.08 }}
-                className="rounded-xl border border-slate-200 bg-white/90 p-4 shadow-sm"
-              >
-                <Icon size={19} className="mb-3 text-blue-700" />
-                <div className="text-sm font-bold text-slate-950">{label}</div>
-                <div className="mt-1 text-xs leading-5 text-slate-500">{value}</div>
-              </motion.div>
-            ))}
-          </div>
+          <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#5cba87', boxShadow: '0 0 8px #5cba87', display: 'inline-block' }} />
+          <span style={{ fontSize: '0.75rem', fontWeight: 500, letterSpacing: '0.08em', color: 'rgba(232,228,218,0.7)' }}>
+            {STATUS_TEXT}
+          </span>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
+        {/* Main headline */}
+        <motion.h1
+          className="display-xl"
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.12 }}
-          className="relative"
+          transition={{ duration: 0.8, delay: 0.35 }}
+          style={{ marginBottom: '0.75rem', fontStyle: 'italic' }}
         >
-          <div className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-2xl shadow-slate-900/10">
-            <div className="relative min-h-[520px] overflow-hidden rounded-[22px] bg-slate-950 p-6 text-white">
-              <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(#334155_1px,transparent_1px),linear-gradient(90deg,#334155_1px,transparent_1px)] [background-size:42px_42px]" />
-              <div className="relative flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-semibold text-teal-300">SYSTEM SNAPSHOT</p>
-                  <h2 className="mt-1 text-2xl font-black">Backend + Cloud</h2>
-                </div>
-                <Database size={26} className="text-orange-300" />
-              </div>
+          {HEADLINE}
+        </motion.h1>
 
-              <div className="relative mt-8 flex justify-center">
-                <img src={heroLayer} alt="Layered platform architecture" className="h-56 w-56 object-contain drop-shadow-2xl sm:h-64 sm:w-64" />
-              </div>
+        {/* Sub-headline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          style={{ fontSize: '1rem', letterSpacing: '0.15em', color: 'var(--accent)', fontFamily: 'var(--font-body)', fontWeight: 400, marginBottom: '2.5rem' }}
+        >
+          {SUBHEADLINE}
+        </motion.p>
 
-              <div className="relative mt-8 grid gap-3">
-                {systemLayers.map(layer => (
-                  <div key={layer.title} className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.08] p-4">
-                    <span className={`h-10 w-1.5 rounded-full ${layer.color}`} />
-                    <div>
-                      <div className="text-sm font-bold">{layer.title}</div>
-                      <div className="mt-0.5 text-xs text-slate-300">{layer.detail}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+        {/* Quick links */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.65 }}
+          style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}
+        >
+          {QUICK_LINKS.map(({ label, href }, i) => (
+            <button
+              key={label}
+              onClick={() => scrollTo(href)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                padding: i === 0 ? '0.65rem 1.5rem' : '0.65rem 1.25rem',
+                borderRadius: 8,
+                fontSize: '0.8125rem',
+                fontWeight: 500,
+                fontFamily: 'var(--font-body)',
+                letterSpacing: '0.04em',
+                cursor: 'pointer',
+                transition: 'all 0.25s ease',
+                background: i === 0 ? 'var(--accent)' : 'transparent',
+                color: i === 0 ? '#0a0c10' : 'var(--text-muted)',
+                border: i === 0 ? 'none' : '1px solid var(--border)',
+              }}
+              onMouseEnter={e => {
+                if (i !== 0) {
+                  e.currentTarget.style.color = 'var(--text-primary)'
+                  e.currentTarget.style.borderColor = 'var(--border-hover)'
+                } else {
+                  e.currentTarget.style.background = '#dbb96f'
+                }
+              }}
+              onMouseLeave={e => {
+                if (i !== 0) {
+                  e.currentTarget.style.color = 'var(--text-muted)'
+                  e.currentTarget.style.borderColor = 'var(--border)'
+                } else {
+                  e.currentTarget.style.background = 'var(--accent)'
+                }
+              }}
+            >
+              {label}
+              {i === 0 && <ArrowRight size={15} />}
+            </button>
+          ))}
+        </motion.div>
 
-              <div className="relative mt-6 rounded-xl border border-teal-300/20 bg-teal-300/10 p-4">
-                <div className="text-xs font-semibold text-teal-200">CURRENT FOCUS</div>
-                <div className="mt-2 text-sm leading-6 text-slate-100">
-                  Scalable APIs, cloud deployments, observability, application security, and AI-assisted workflows.
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Location */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.85 }}
+          style={{ marginTop: '2.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-dim)', fontSize: '0.75rem', letterSpacing: '0.06em' }}
+        >
+          <MapPin size={13} />
+          San Francisco Bay Area, CA
         </motion.div>
       </div>
     </section>

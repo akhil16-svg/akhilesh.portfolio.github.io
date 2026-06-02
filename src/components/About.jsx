@@ -1,109 +1,229 @@
+/**
+ * About.jsx
+ * ───────────────────────────────────────────────────────
+ * About Me section with profile photo, bio text, and key credentials.
+ *
+ * TO CUSTOMISE:
+ *   • Photo       → replace /profile.png in /public/
+ *   • Bio text    → edit BIO_PARAGRAPHS below
+ *   • Credentials → edit CREDENTIALS array
+ *   • Strengths   → edit STRENGTHS array
+ */
+
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Award, CheckCircle2, Code2, MapPin, ShieldCheck } from 'lucide-react'
+import { ShieldCheck, Award, GraduationCap, MapPin } from 'lucide-react'
 
-function SectionIntro() {
-  return (
-    <div className="mb-12 max-w-3xl">
-      <span className="text-sm font-bold text-blue-700">About</span>
-      <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950 sm:text-5xl">
-        Practical engineering with a backend-first mindset.
-      </h2>
-      <p className="mt-5 text-lg leading-8 text-slate-600">
-        I like building software that has a clear purpose: APIs that are easy to maintain,
-        systems that can scale, and user workflows that feel simple because the backend is doing
-        the right work.
-      </p>
-    </div>
-  )
+/* ── EDITABLE CONTENT ─────────────────────────────── */
+const BIO_PARAGRAPHS = [
+  "I'm a software engineer with a Master's in Computer Science from California State University, East Bay. My work lives at the intersection of backend engineering, cloud infrastructure, and AI-powered product workflows.",
+  "I build APIs that are clean to maintain, systems designed to scale, and user-facing workflows that feel simple — because the right work is happening behind the scenes.",
+]
+
+const CREDENTIALS = [
+  {
+    label: 'AWS Certified Solutions Architect',
+    value: 'Associate · Active credential',
+    icon: ShieldCheck,
+  },
+  {
+    label: 'Master of Science, Computer Science',
+    value: 'Cal State East Bay · 2023–2025',
+    icon: GraduationCap,
+  },
+  {
+    label: 'IBM Back-End Development',
+    value: 'Coursera · Completed',
+    icon: Award,
+  },
+  {
+    label: 'Location',
+    value: 'San Francisco Bay Area, CA',
+    icon: MapPin,
+  },
+]
+
+const STRENGTHS = [
+  'Python backend development — Flask, Django, FastAPI, REST APIs',
+  'Cloud architecture — AWS, Docker, Kubernetes, CI/CD pipelines',
+  'AI-enabled workflows — invoice intelligence, chatbot systems, forecasting',
+  'Graduate-level CS foundations — distributed systems, databases, OS',
+]
+/* ── END EDITABLE CONTENT ─────────────────────────── */
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: (i) => ({ opacity: 1, y: 0, transition: { duration: 0.65, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] } }),
 }
 
-const strengths = [
-  'Python backend development with Flask, Django, REST APIs, and SQL systems.',
-  'Cloud architecture with AWS, Docker, Kubernetes, CI/CD, and deployment fundamentals.',
-  'AI-enabled projects across invoice intelligence, chatbot workflows, and forecasting.',
-  'CS fundamentals from graduate study in computer science, distributed systems, databases, and operating systems.',
-]
-
-const credentials = [
-  { label: 'AWS Certified', value: 'Solutions Architect Associate', icon: ShieldCheck },
-  { label: 'IBM Back-End Development', value: 'Coursera program completed', icon: Award },
-  { label: 'Location', value: 'San Francisco Bay Area, CA', icon: MapPin },
-]
-
 export default function About() {
-  const ref = useRef(null)
+  const ref    = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="about" className="px-5 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55 }}
-        >
-          <SectionIntro />
-        </motion.div>
+    <section id="about" className="section" ref={ref}>
+      {/* Section label */}
+      <motion.span
+        className="section-label"
+        variants={fadeUp}
+        initial="hidden"
+        animate={inView ? 'show' : 'hidden'}
+        custom={0}
+        style={{ display: 'block', marginBottom: '1.25rem' }}
+      >
+        About Me
+      </motion.span>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.86fr]">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+
+        {/* Left col — Profile + Bio */}
+        <div>
+          {/* Profile photo */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.08 }}
-            className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+            variants={fadeUp}
+            initial="hidden"
+            animate={inView ? 'show' : 'hidden'}
+            custom={1}
+            style={{ marginBottom: '2rem' }}
           >
-            <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
-              <Code2 size={24} />
+            <div style={{
+              width: 180,
+              height: 180,
+              borderRadius: '50%',
+              border: '1.5px solid rgba(197,169,106,0.3)',
+              padding: 4,
+              marginBottom: '1.5rem',
+            }}>
+              <img
+                src="/profile.png"
+                alt="Akhilesh Pingle"
+                style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', filter: 'grayscale(15%)' }}
+              />
             </div>
-            <h3 className="text-2xl font-black text-slate-950">What I bring</h3>
-            <p className="mt-4 leading-8 text-slate-600">
-              I am a software engineer with a Master&apos;s in Computer Science from California State
-              University, East Bay. My work is strongest at the intersection of backend engineering,
-              cloud architecture, and AI application development.
-            </p>
+          </motion.div>
 
-            <div className="mt-7 grid gap-4">
-              {strengths.map(item => (
-                <div key={item} className="flex gap-3">
-                  <CheckCircle2 size={19} className="mt-1 shrink-0 text-teal-600" />
-                  <p className="text-sm leading-6 text-slate-600">{item}</p>
+          {/* Headline */}
+          <motion.h2
+            className="display-md"
+            variants={fadeUp}
+            initial="hidden"
+            animate={inView ? 'show' : 'hidden'}
+            custom={2}
+            style={{ marginBottom: '1.5rem' }}
+          >
+            Practical engineering,<br />
+            <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>backend-first mindset.</span>
+          </motion.h2>
+
+          {/* Bio paragraphs */}
+          {BIO_PARAGRAPHS.map((para, i) => (
+            <motion.p
+              key={i}
+              variants={fadeUp}
+              initial="hidden"
+              animate={inView ? 'show' : 'hidden'}
+              custom={3 + i}
+              style={{ fontSize: '0.9375rem', lineHeight: 1.85, color: 'var(--text-muted)', marginBottom: '1rem' }}
+            >
+              {para}
+            </motion.p>
+          ))}
+
+          {/* Strengths */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate={inView ? 'show' : 'hidden'}
+            custom={5}
+            style={{ marginTop: '2rem' }}
+          >
+            <p className="section-label" style={{ marginBottom: '1rem' }}>Core strengths</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+              {STRENGTHS.map((s, i) => (
+                <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <span style={{ width: 20, height: 20, borderRadius: '50%', border: '1px solid rgba(197,169,106,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)' }} />
+                  </span>
+                  <p style={{ fontSize: '0.875rem', lineHeight: 1.7, color: 'var(--text-muted)' }}>{s}</p>
                 </div>
               ))}
             </div>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.14 }}
-            className="grid gap-4"
-          >
-            {credentials.map(({ label, value, icon: Icon }) => (
-              <div key={label} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-950 text-white">
-                    <Icon size={20} />
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-slate-950">{label}</div>
-                    <div className="mt-1 text-sm leading-6 text-slate-500">{value}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            <div className="rounded-2xl border border-blue-100 bg-blue-50 p-6">
-              <div className="text-sm font-black text-blue-800">Currently focused on</div>
-              <p className="mt-2 text-sm leading-6 text-blue-950/75">
-                Backend roles where I can build APIs, cloud-ready services, deployment workflows,
-                and AI tools that solve real business problems.
-              </p>
-            </div>
-          </motion.div>
         </div>
+
+        {/* Right col — Credentials */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? 'show' : 'hidden'}
+          custom={2}
+          style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+        >
+          {CREDENTIALS.map(({ label, value, icon: Icon }, i) => (
+            <motion.div
+              key={label}
+              variants={fadeUp}
+              initial="hidden"
+              animate={inView ? 'show' : 'hidden'}
+              custom={3 + i}
+              className="card"
+              style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}
+            >
+              <div style={{
+                width: 42,
+                height: 42,
+                borderRadius: 10,
+                background: 'rgba(197,169,106,0.08)',
+                border: '1px solid rgba(197,169,106,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--accent)',
+                flexShrink: 0,
+              }}>
+                <Icon size={18} />
+              </div>
+              <div>
+                <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.3 }}>{label}</p>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>{value}</p>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Focus card */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate={inView ? 'show' : 'hidden'}
+            custom={8}
+            style={{
+              background: 'rgba(197,169,106,0.06)',
+              border: '1px solid rgba(197,169,106,0.18)',
+              borderRadius: 16,
+              padding: '1.5rem',
+              marginTop: '0.5rem',
+            }}
+          >
+            <p style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
+              Currently seeking
+            </p>
+            <p style={{ fontSize: '0.9rem', lineHeight: 1.75, color: 'var(--text-muted)' }}>
+              Backend, cloud, and AI application roles where I can build scalable APIs,
+              cloud-ready services, and AI tools that solve real business problems.
+            </p>
+          </motion.div>
+        </motion.div>
       </div>
+
+      {/* Responsive: stack on mobile */}
+      <style>{`
+        @media (max-width: 768px) {
+          #about > div:nth-child(2) {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
