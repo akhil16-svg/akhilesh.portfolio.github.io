@@ -75,7 +75,7 @@ export default function Education() {
         <span className="section-label" style={{ display: 'block', marginBottom: '1rem' }}>Education & Credentials</span>
         <h2 className="display-lg">
           Academic depth,<br />
-          <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>current training.</span>
+          <span style={{ color: 'var(--accent)' }}>current training.</span>
         </h2>
       </motion.div>
 
@@ -111,7 +111,7 @@ export default function Education() {
               </div>
 
               {/* Title */}
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 500, color: 'var(--text-primary)', lineHeight: 1.25, marginBottom: '0.35rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 700, letterSpacing: '-0.01em', color: 'var(--text-primary)', lineHeight: 1.25, marginBottom: '0.35rem' }}>
                 {item.title}
               </h3>
 

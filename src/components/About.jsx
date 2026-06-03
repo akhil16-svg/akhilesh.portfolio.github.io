@@ -91,10 +91,10 @@ export default function About() {
             initial="hidden"
             animate={inView ? 'show' : 'hidden'}
             custom={1}
-            style={{ marginBottom: '1.75rem' }}
+            style={{ marginBottom: '1.75rem', fontWeight: 700 }}
           >
             Practical engineering,<br />
-            <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>backend-first mindset.</span>
+            <span style={{ color: 'var(--accent)' }}>backend-first mindset.</span>
           </motion.h2>
 
           {/* Bio paragraphs */}

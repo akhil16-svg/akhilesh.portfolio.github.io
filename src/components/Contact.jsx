@@ -51,7 +51,7 @@ export default function Contact() {
           <span className="section-label" style={{ display: 'block', marginBottom: '1rem' }}>Get in Touch</span>
           <h2 className="display-lg" style={{ marginBottom: '1.5rem' }}>
             Let's talk<br />
-            <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>backend, cloud,<br/>or AI work.</span>
+            <span style={{ color: 'var(--accent)' }}>backend, cloud,<br/>or AI work.</span>
           </h2>
           <p style={{ fontSize: '0.9375rem', lineHeight: 1.85, color: 'var(--text-muted)', maxWidth: 440, marginBottom: '2.5rem' }}>
             I'm open to software engineering, backend development, cloud engineering,

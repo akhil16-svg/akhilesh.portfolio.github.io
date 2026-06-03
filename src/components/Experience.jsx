@@ -85,7 +85,7 @@ export default function Experience() {
         <span className="section-label" style={{ display: 'block', marginBottom: '1rem' }}>Work Experience</span>
         <h2 className="display-lg">
           Built inside<br />
-          <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>product teams.</span>
+          <span style={{ color: 'var(--accent)' }}>product teams.</span>
         </h2>
       </motion.div>
 
@@ -113,7 +113,7 @@ export default function Experience() {
                   <span style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: exp.accentColor, display: 'block', marginBottom: '0.35rem' }}>
                     {exp.type}
                   </span>
-                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 400, color: 'var(--text-primary)', lineHeight: 1.15 }}>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.15 }}>
                     {exp.role}
                   </h3>
                   <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>

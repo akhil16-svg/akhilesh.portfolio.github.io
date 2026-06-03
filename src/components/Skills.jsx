@@ -75,7 +75,7 @@ export default function Skills() {
         <span className="section-label" style={{ display: 'block', marginBottom: '1rem' }}>Skills</span>
         <h2 className="display-lg">
           Backend skills<br />
-          <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>with cloud depth.</span>
+          <span style={{ color: 'var(--accent)' }}>with cloud depth.</span>
         </h2>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-muted)', marginTop: '1rem', lineHeight: 1.8, maxWidth: 560 }}>
           The stack is centered on server-side development, cloud deployment,
