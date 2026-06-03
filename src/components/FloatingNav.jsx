@@ -12,12 +12,13 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_SECTIONS = [
-  { id: 'hero',       label: 'Home' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects',   label: 'Projects' },
-  { id: 'skills',     label: 'Skills' },
-  { id: 'education',  label: 'Certifications' },
-  { id: 'contact',    label: 'Contact' },
+  { id: 'hero',           label: 'Home' },
+  { id: 'experience',     label: 'Experience' },
+  { id: 'projects',       label: 'Projects' },
+  { id: 'skills',         label: 'Skills' },
+  { id: 'education',      label: 'Education' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'contact',        label: 'Contact' },
 ]
 
 export default function FloatingNav() {

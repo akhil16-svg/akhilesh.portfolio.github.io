@@ -22,7 +22,8 @@ const MOBILE_NAV_LINKS = [
   { label: 'Projects',       href: '#projects' },
   { label: 'Experience',     href: '#experience' },
   { label: 'Skills',         href: '#skills' },
-  { label: 'Certifications', href: '#education' },
+  { label: 'Education',      href: '#education' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact',        href: '#contact' },
 ]
 

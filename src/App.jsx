@@ -9,6 +9,7 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Experience from './components/Experience'
 import Education from './components/Education'
+import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ScrollTimeline from './components/ScrollTimeline'
@@ -34,6 +35,7 @@ export default function App() {
           <Experience />
           <Skills />
           <Education />
+          <Certifications />
           <Contact />
           <Footer />
         </main>
