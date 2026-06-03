@@ -38,7 +38,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section" ref={ref}
-      style={{ background: 'linear-gradient(to bottom, var(--bg-base), #060709)' }}
+      style={{ background: 'linear-gradient(to bottom, var(--bg-base), rgba(6, 8, 20, 0.95))' }}
     >
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
 
@@ -74,7 +74,7 @@ export default function Contact() {
                 transition: 'background 0.2s',
                 fontFamily: 'var(--font-body)',
               }}
-              onMouseEnter={e => e.currentTarget.style.background = '#dbb96f'}
+              onMouseEnter={e => e.currentTarget.style.background = '#6d4eeb'}
               onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}
             >
               <Mail size={15} /> Email Me
@@ -138,8 +138,8 @@ export default function Contact() {
             >
               <div style={{
                 width: 38, height: 38, borderRadius: 9,
-                background: 'rgba(197,169,106,0.07)',
-                border: '1px solid rgba(197,169,106,0.15)',
+                background: 'rgba(124,92,255,0.07)',
+                border: '1px solid rgba(124,92,255,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: 'var(--accent)', flexShrink: 0,
               }}>

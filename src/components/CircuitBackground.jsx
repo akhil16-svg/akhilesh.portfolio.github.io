@@ -15,8 +15,8 @@ const GRID      = 48      // px between grid nodes
 const MAX_SEGS  = 80      // max active circuit segments
 const FADE_MS   = 1400    // ms for a segment to fully fade
 const COLORS    = [
-  'rgba(197, 169, 106,',  // amber gold (primary)
-  'rgba(110, 168, 200,',  // steel blue (secondary)
+  'rgba(124, 92, 255,',   // primary purple
+  'rgba(0, 212, 255,',    // cyan
 ]
 
 /* Directions: right, down, left, up */

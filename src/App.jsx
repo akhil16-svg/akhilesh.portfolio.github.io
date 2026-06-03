@@ -1,7 +1,5 @@
 /**
  * App.jsx — Root layout
- * Circuit background appears on mouse hover (desktop only).
- * No mountain image — clean dark base.
  */
 
 import Sidebar from './components/Sidebar'
@@ -15,14 +13,15 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ScrollTimeline from './components/ScrollTimeline'
 import CircuitBackground from './components/CircuitBackground'
+import FloatingNav from './components/FloatingNav'
 
 export default function App() {
   return (
     <>
-      {/* Interactive circuit board — appears on cursor movement */}
+      {/* Interactive circuit board (desktop, cursor-reactive) */}
       <CircuitBackground />
 
-      {/* Cinematic grain texture */}
+      {/* Noise texture */}
       <div className="grain-overlay" aria-hidden="true" />
 
       <div className="layout-wrapper" style={{ position: 'relative', zIndex: 3 }}>
@@ -39,7 +38,10 @@ export default function App() {
           <Footer />
         </main>
 
-        {/* Scroll-driven milestone timeline — fixed on right edge */}
+        {/* Right-side floating section nav (desktop only) */}
+        <FloatingNav />
+
+        {/* Scroll-driven milestone timeline */}
         <ScrollTimeline />
       </div>
     </>

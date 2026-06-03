@@ -59,12 +59,12 @@ export default function Hero() {
           position: 'absolute',
           inset: 0,
           background: `
-            radial-gradient(ellipse 70% 60% at 30% 40%,
-              rgba(197,169,106,0.06) 0%,
+            radial-gradient(ellipse 70% 60% at 25% 35%,
+              rgba(124,92,255,0.09) 0%,
               transparent 65%
             ),
-            radial-gradient(ellipse 50% 40% at 70% 70%,
-              rgba(110,168,200,0.04) 0%,
+            radial-gradient(ellipse 50% 40% at 75% 70%,
+              rgba(0,212,255,0.06) 0%,
               transparent 60%
             )
           `,
@@ -83,7 +83,7 @@ export default function Hero() {
           left: 'clamp(1.5rem, 5vw, 4.5rem)',
           right: '4rem',
           height: 1,
-          background: 'linear-gradient(to right, rgba(197,169,106,0.5), transparent)',
+          background: 'linear-gradient(to right, rgba(124,92,255,0.45), transparent)',
           transformOrigin: 'left',
         }}
       />
@@ -99,8 +99,8 @@ export default function Hero() {
         <motion.div variants={fadeUp} style={{ marginBottom: '2rem', display: 'inline-flex', alignItems: 'center', gap: '0.625rem' }}>
           <span style={{
             width: 7, height: 7, borderRadius: '50%',
-            background: '#5cba87',
-            boxShadow: '0 0 10px rgba(92,186,135,0.8)',
+            background: 'var(--accent-highlight)',
+            boxShadow: '0 0 10px rgba(59,255,181,0.8)',
             display: 'inline-block',
             animation: 'pulse-dot 2.5s ease-in-out infinite',
           }} />
@@ -131,9 +131,9 @@ export default function Hero() {
           }}
         >
           {HEADLINE.split('\n').map((line, i) => (
-            <span key={i} style={{ display: 'block' }}>
+            <span style={{ display: 'block' }}>
               {i === 1
-                ? <><span style={{ color: 'var(--accent)' }}>that</span> scale.</>
+                ? <><span style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-cool))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>that</span> scale.</>
                 : line
               }
             </span>
@@ -190,7 +190,7 @@ export default function Hero() {
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
                   e.currentTarget.style.background = 'rgba(255,255,255,0.09)'
                 } else {
-                  e.currentTarget.style.background = '#dbb96f'
+                  e.currentTarget.style.background = '#6d4eeb'
                 }
               }}
               onMouseLeave={e => {
@@ -240,10 +240,9 @@ export default function Hero() {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '0.5rem',
-          color: 'var(--text-dim)',
         }}
       >
-        <span style={{ fontSize: '0.58rem', letterSpacing: '0.3em', textTransform: 'uppercase', writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: 600 }}>
+        <span style={{ fontSize: '0.58rem', letterSpacing: '0.3em', textTransform: 'uppercase', writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: 600, color: 'var(--text-dim)' }}>
           scroll
         </span>
         <motion.div
