@@ -2,13 +2,12 @@
 
 Live site: https://akhil16-svg.github.io/akhilesh.portfolio.github.io/
 
-Portfolio website for Akhilesh Pingle, focused on Python backend development, AWS architecture, REST APIs, cloud-ready systems, and AI application work.
+Portfolio website for Akhilesh Pingle, focused on production Python backends, RAG systems, agentic workflows, and AWS infrastructure.
 
 ## Stack
 
 - React 19
 - Vite 8
-- Tailwind CSS
 - Framer Motion
 - Lucide React
 
@@ -29,12 +28,11 @@ Production output goes to `dist/`. The GitHub Actions workflow publishes that fo
 
 ## Sections
 
-- Hero with backend/cloud positioning and architecture visual
-- About with credentials and engineering focus
-- Projects with real GitHub links
-- Skills aligned to Python, Flask, Django, AWS, Docker, Kubernetes, CI/CD, Linux, and security
-- Experience at Omatochi
-- Education and certifications
+- Centered portrait hero with AI engineering positioning
+- Precise backend, AI, cloud, and platform expertise
+- Agentic Document Intelligence Platform, Serverless Sales Forecasting API, and InvoiceAI
+- Resume-backed experience with highly visible impact metrics
+- Education, AWS certification, and contact details
 - Contact links for email, LinkedIn, and GitHub
 
 ## GitHub Pages
