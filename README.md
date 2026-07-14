@@ -2,7 +2,7 @@
 
 Live site: https://akhil16-svg.github.io/akhilesh.portfolio.github.io/
 
-Portfolio website for Akhilesh Pingle, focused on production Python backends, RAG systems, agentic workflows, and AWS infrastructure.
+Portfolio website for Akhilesh Pingle, focused on production Conversational AI, RAG, recommendation systems, forecasting, distributed data pipelines, and AWS inference services.
 
 ## Stack
 
@@ -29,9 +29,10 @@ Production output goes to `dist/`. The GitHub Actions workflow publishes that fo
 ## Sections
 
 - Centered portrait hero with AI engineering positioning
-- Precise backend, AI, cloud, and platform expertise
-- Agentic Document Intelligence Platform, Serverless Sales Forecasting API, and InvoiceAI
+- Precise AI/ML, data infrastructure, cloud, and MLOps expertise
+- Agentic Document Intelligence Platform and Serverless Sales Forecasting API
 - Resume-backed experience with highly visible impact metrics
+- Persistent light and dark display modes
 - Education, AWS certification, and contact details
 - Contact links for email, LinkedIn, and GitHub
 
